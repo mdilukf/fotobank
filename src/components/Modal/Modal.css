@@ -1,0 +1,10 @@
+@import url("https://unicons.iconscout.com/release/v2.1.9/css/unicons.css");
+/* @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900"); */
+
+dialog{
+    width: 700px;
+    height: auto;
+    margin: 10rem auto;
+    background-size: cover;
+    
+}

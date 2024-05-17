@@ -1,0 +1,60 @@
+/* контакты */
+.centr{
+    justify-content: center;
+    display: flex;
+}
+h1{
+    font-family: 'Book Antiqua', cursive;
+    font-size: 60px;
+    line-height: 1.2;
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
+    margin-top: 130px;
+}
+.col-4{
+    text-align: center;
+    margin-top: 150px;
+}
+.content{
+    border: 2px solid rgb(255, 255, 255, 0.3);
+    padding: 120px 70px;
+    width: 459px;
+    height: 430px;
+    justify-content: center;
+    align-items: center;
+}
+h2{
+    font-family: 'Book Antiqua', cursive;
+    font-size: 45px;
+    line-height: 1.2;
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
+}
+h3{
+    font-family: 'Book Antiqua', cursive;
+    font-size: 45px;
+    line-height: 1.2;
+    font-weight: 400;
+    text-align: center;
+    padding-top: 50px;
+}
+/* авторам */
+.spravki{
+    border: 2px solid rgb(255, 255, 255, 0.3);
+    margin: 70px 40px 0 40px;
+    padding: 30px;
+}
+.spravki h2{
+    text-align: left;
+}
+.spravki h3{
+    text-align: left;
+    font-size: 40px;
+}
+.spravki a{
+    color: white;
+    font-size: 30px;
+    font-family: 'Book Antiqua', cursive;
+}

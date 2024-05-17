@@ -1,0 +1,529 @@
+*{
+    background: #0d0e25;
+    color: white;
+    padding: 0;
+    margin: 0;
+}
+.font-link1{
+    font-family: 'Book Antiqua', cursive;
+    font-size: 30px;
+    font-style: italic;
+    color: rgb(255, 255, 255);
+    margin-right: 22px;
+    text-decoration: none;
+    background: #111230;
+    
+}
+.font-link2{
+    font-family: 'Book Antiqua', cursive;
+    font-size: 45px;
+    font-style: italic;
+    color: white;
+    text-decoration: none;
+    margin-top: 250px;
+    background: #111230;
+    background: none;
+}
+.font-link5{
+    font-family: 'Book Antiqua', cursive;
+    font-size: 30px;
+    font-style: italic;
+    color: white;
+    text-decoration: none;
+    margin-top: 250px;
+    background: #111230;
+    background: none;
+}
+.font-link3{
+    font-family: 'Book Antiqua', cursive;
+    font-size: 25px;
+    font-style: italic;
+    color: rgb(255, 255, 255);
+    margin-right: 22px;
+    text-decoration: none;
+    background: #111230;
+    
+}
+.font-link3::after{
+    display: block; /*превращаем его в блочный элемент*/
+    content: ""; /*контента в данном блоке не будет поэтому в кавычках ничего не ставим*/
+    height: 1px; /*задаём высоту линии*/
+    width: 0%; /*задаём начальную ширину элемента (линии)*/
+    transition: width 0.4s ease-in-out; 
+    background: white;
+}
+.font-link3:hover::after, .font-link3:focus::after{
+    width: 100%;
+    
+}
+.font-link3:hover{
+    color: white;
+}
+.font-link4{
+    font-family: 'Book Antiqua', cursive;
+    font-size: 45px;
+    font-style: italic;
+    color: white;
+    text-decoration: none;
+    background: #111230;
+    text-align: center;
+    align-items: center;
+}
+.font-link4:hover{
+    color: white;
+}
+.navbae{
+    border-bottom: 2px solid #bec1e9;
+    box-shadow: 0px 5px 13px 1px #bec1e9 ;
+    z-index: 2;
+    width: 100%;
+    position: relative;
+}
+.navbar-collapse{
+    padding-left: 50px;
+    margin-top: 30PX;
+}
+.font-link2:hover{
+    color: white;
+}
+.font-link1::after{
+    display: block; /*превращаем его в блочный элемент*/
+    content: ""; /*контента в данном блоке не будет поэтому в кавычках ничего не ставим*/
+    height: 1px; /*задаём высоту линии*/
+    width: 0%; /*задаём начальную ширину элемента (линии)*/
+    transition: width 0.4s ease-in-out; 
+    background: white;
+}
+.font-link1:hover::after, .font-link1:focus::after{
+    width: 100%;
+    
+}
+.font-link1:hover{
+    color: white;
+}
+
+.navbar-toggler-icon{
+    background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3e%3cpath stroke=%27rgba%28255, 255, 255, 1%29%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e");
+}
+.navbar-light .navbar-toggler{
+    border: none;
+}
+.navbar-toggler{
+    color: #8687ac;
+}
+@media (min-width: 1400px){
+    .container{
+        max-width: 1460px;
+
+    }
+}
+.navbar>.container{
+    margin-top: 20px;
+    align-items: flex-start;
+    height: 100px;
+    background-color: #111230;
+}
+.navbar-expand-lg{
+    background-color: #111230;
+}
+.nav-item{
+    background-color: #111230;
+    padding-top: -70px;
+}
+.nav-link{
+    margin-top: -30px;
+    margin-bottom: 10px;
+}
+.collapse{
+    background-color: #111230;
+}
+.gap-3{
+    background-color: #111230;
+    margin-bottom: -40px;
+}
+.navbar-nav{
+    padding-bottom: -50px;
+}
+.button1{
+    background-image: linear-gradient(116.0deg, #6665df 17%, #74209f 82%);
+    border-radius: 40px;
+    font-family: 'Book Antiqua', cursive;
+    font-size: 30px;
+    font-style: italic;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: -25px;
+    border: 1px solid #111230;
+    /* margin-bottom: 20px; */
+    
+}
+.button2{
+    background-image: linear-gradient(116.0deg, #6565dfc6 17%, #74209fc6 82%);
+    border-radius: 40px;
+    font-family: 'Book Antiqua', cursive;
+    font-size: 30px;
+    font-style: italic;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: -25px;
+    border:none;
+    transition: color 500ms ease;  
+}
+.button2:hover{
+    background-image: linear-gradient(116.0deg, #6565df 17%, #74209f 82%);
+}
+.button2.active{
+    background-image: linear-gradient(116.0deg, #6565df 17%, #74209f 82%);
+}
+.button3{
+    background-image: linear-gradient(116.0deg, #6665df 17%, #74209f 82%);
+    border-radius: 40px;
+    font-family: 'Book Antiqua', cursive;
+    font-size: 30px;
+    font-style: italic;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 75%;
+    margin-bottom: 10;
+    border: 1px solid #111230;
+    /* margin-bottom: 20px; */
+}
+.button4{
+    background-image: linear-gradient(116.0deg, #6665df 17%, #74209f 82%);
+    border-radius: 40px;
+    font-family: 'Book Antiqua', cursive;
+    font-size: 30px;
+    font-style: italic;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 7%;
+    margin-left: 25%;
+    border: none;
+    float: left;
+    /* margin-bottom: 20px; */
+}
+.button-form{
+    margin-top: 10px;
+    left: 10%;
+}
+.button5{
+    background-image: linear-gradient(116.0deg, #6565dfc6 17%, #74209fc6 82%);
+    border-radius: 40px;
+    font-family: 'Book Antiqua', cursive;
+    font-size: 30px;
+    font-style: italic;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 50px;
+    border:none;
+    transition: color 500ms ease; 
+    
+}
+.button5:hover{
+    background-image: linear-gradient(116.0deg, #6565df 17%, #74209f 82%);
+}
+.button5.active{
+    background-image: linear-gradient(116.0deg, #6565df 17%, #74209f 82%);
+}
+.container{
+    align-items: center;
+}
+
+/* Страница Home */
+.div-home{
+    position: relative;
+}
+.div-home-flex{
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    background-color: rgb(255, 255, 255, 0.0) ;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-size: 50px;
+}
+.logo1{
+    width: 100%;
+    height: 600px;
+    z-index: 1;
+    justify-content: center;
+    align-content: center;
+    object-fit: cover;
+}
+.jumbotron1 {
+    background-image: url("./img/home-top.jpg");
+    height: 800px;
+    background-size: cover;
+    width: 100%;
+    margin-top: -130px;
+    
+}
+.container{
+    background-color: rgb(100, 100, 100, 0.0);
+}
+.display-3{
+    font-family: 'Book Antiqua', cursive;
+    font-size: 60px;
+    font-style: italic;
+    text-align: center;
+    background: none;
+    padding-top: 220px;
+}
+.input-group{
+    margin-top: 80px;
+    border-radius: none;
+    background: none;
+    border: none;
+    color: white;
+}
+.input-group input{
+    border: none;
+    color: white;
+    font-size: 20px;
+}
+
+.input-group input:focus{
+    box-shadow: none;
+    border: 2px solid bluergb(113, 209, 35)
+}
+.form-control {
+    background: rgba(0, 0, 0, 0.505);
+    border: none;
+    font-family: 'Book Antiqua', cursive;
+    font-style: italic;
+    color: white;
+}
+.btn{
+    --bs-btn-color: white;
+    font-family: 'Book Antiqua', cursive;
+    font-style: italic;
+    background-image: linear-gradient(116.0deg, #6665df 17%, #74209f 82%);
+    border: none;
+    font-size: 30px ;
+
+}
+/* галерея */
+.container-div{
+    object-fit: cover;
+    width: 400px;
+    height: 275px;
+}
+.container-div-1{
+    margin-top: 30px;
+    background-color: #111230;
+
+}
+.custom{
+    border: 2px solid rgba(255, 255, 255, 0.464);
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 70px;
+    background-color: #111230;
+}
+.custom:hover{
+    box-shadow: 0px 1px 26px -4px #ffffff;
+      
+}
+.container-div-1 p{
+    background: none;
+    text-align: center;
+    font-family: 'Book Antiqua', cursive;
+    font-style: italic;
+
+}
+.container-div-1 a{
+    background: none;
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+}
+.gallerea h2{
+    margin-top: 100px;
+    text-align: center;
+    font-family: 'Book Antiqua', cursive;
+    color: rgb(255, 255, 255);
+    font-size: 70px;
+}
+.gallerea-div{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.div-columns{
+    margin-top: 50px;
+}
+/* о нас */
+.o-nas{
+    margin-top: 130px;
+}
+.jumbotron2 {
+    background-image: url("./img/o-nas.jpg");
+    width: 100%;
+    height: 700px;
+    background-size: cover;
+    
+}
+.display-4{
+    font-family: 'Book Antiqua', cursive;
+    font-size: 80px;
+    font-style: italic;
+    text-align: center;
+    background: none;
+    padding-top: 220px;
+}
+.display-5{
+    font-family: 'Book Antiqua', cursive;
+    font-size: 35px;
+    text-align: center;
+    background: none;
+    padding-top: 20px;
+}
+.button-1{
+    background-image: linear-gradient(116.0deg, #6665df 17%, #74209f 82%);
+    border-radius: 40px;
+    font-family: 'Book Antiqua', cursive;
+    font-size: 30px;
+    font-style: italic;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-image: linear-gradient(116.0deg, #6665df 17%, #74209f 82%);
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+/* фотографы */
+.col-sm-auto-2{
+    border: 2px solid rgba(255, 255, 255, 0.464);
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 70px;
+    background-color: #111230;
+   
+}
+.container-div-2{
+
+    margin-top: 300px;
+    /* display: flex; */
+}
+.container-div-2 p{
+    margin-top: 50px;
+    font-family: 'Book Antiqua', cursive;
+    font-size: 70px;
+    font-style: italic;
+}
+.container-div-fotogf{
+    margin-left: 300px;
+    width: 400px;
+    height: auto;
+}
+.card-img{
+    background: none;
+    height: 500px;
+}
+.img-fotograf{
+    width: 100%;
+    height: auto;
+    background-size: cover;
+    /* position: absolute; */
+    
+}
+.container-img{
+    position: relative;
+}
+.container-img h1{
+    position: absolute;
+    top: 250px;
+    left: 30px;
+    background: none;
+    font-family: 'Book Antiqua', cursive;
+    font-size: 55px;
+}
+.margin-div-1{
+    text-align: center;
+    align-items: center;
+    padding-top: 200px;
+}
+.margin-div-1 p{
+    background: none;
+    font-family: 'Book Antiqua', cursive;
+    font-style: italic;
+    font-size: 45px;
+}
+.div-columns-1{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+/* портфолио фотографов */
+.fotograf h2{
+    margin-top: 100px;
+    text-align: center;
+    font-family: 'Book Antiqua', cursive;
+    color: rgb(255, 255, 255);
+    font-size: 70px;
+}
+.fotograf-div{
+    margin-top: 300px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.img-fotograf-1{
+    width: 390px;
+    height: 547px;
+    background-size: cover;
+    margin-left: 50px;
+}
+.container-div-3{
+    margin-top: 50px;
+}
+.container-img-1{
+    position: relative;
+}
+.container-img-1 h1{
+    position: absolute;
+    top: 320px;
+    left: 130px;
+    background: none;
+    font-family: 'Book Antiqua', cursive;
+    font-size: 45px;
+}
+/* footer */
+
+.col-md-6{
+   background: #111230;
+   align-items: center;
+   
+}
+.col-md-3{
+    background: #111230;
+}
+.mb-md-0{
+    background: #111230;
+}
+.mt-md-0{
+    background: #111230;
+}
+
+/* modal-window */
+.btn-close{
+    color:#ffffff9e;
+    font-size:30px;
+    text-decoration:none;
+    position:absolute;
+    right:10px;
+    top:0;
+    background: none;
+    --bs-btn-close-focus-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0);
+}
+.btn-close:hover{
+    color:#ffffff;
+}
+#close{
+    display:none
+
+}

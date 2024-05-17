@@ -1,0 +1,85 @@
+a{
+    margin-top: 30px;
+}
+.App {
+    width: 100px;
+    background-size: cover;
+}
+  
+.Auth-form-container {
+    display: flex;
+    width: 100%;
+    height: auto;
+    background-size: cover;
+
+
+}
+.div-h3{
+    font-family: 'Book Antiqua', cursive;
+    font-size: 45px;
+    line-height: 1.2;
+    font-weight: 400;
+    text-align: center;
+    padding-top: 30px;
+    background: none;
+
+}
+  
+.Auth-form {
+    width: 420px;
+    margin-top: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 8px;
+    background-color: #ffffff9f;
+    border-radius: 30px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin-bottom: 30px;
+  }
+  
+  .Auth-form-content {
+    padding-left: 12%;
+    padding-right: 12%;
+    background-color: #0d0e2500;
+  }
+  
+.Auth-form-title {
+    text-align: center;
+    margin-bottom: 1em;
+    font-size: 24px;
+    color: rgb(34, 34, 34);
+    font-weight: 800;
+    background-color: #0d0e2500;
+    font-family: 'Book Antiqua', cursive;
+    
+  }
+.form-group{
+    background-color: #0d0e2500;
+    color: white;
+}
+.form-control{
+    background: rgb(207 88 88 / 51%)
+}
+label{
+    color: white;
+    background-color: #0d0e2500;
+}
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(34, 34, 34);
+}
+
+.d-grid{
+    background:none;
+}
+p{
+    background: none;
+    color: rgb(255, 255, 255);
+}
+a{
+    background: none;
+    color: black;
+}

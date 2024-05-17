@@ -1,0 +1,383 @@
+/* о нас */
+.jumbotron3 {
+    background-image: url("./img/o-nas.jpg");
+    width: 100%;
+    height: 700px;
+    background-size: cover;
+    margin-top: -130px;
+}
+.content-o-nas{
+    border: 2px solid rgb(255, 255, 255, 0.3);
+    padding: 120px 70px;
+    justify-content: center;
+    align-items: center;
+    margin: 100px auto auto 50px;
+}
+.content-o-nas-1{
+    justify-content: center;
+    align-items: center;
+    margin: 100px auto auto 50px;
+}
+.content-prais{
+    border: 2px solid rgb(255, 255, 255, 0.3);
+    padding: 120px 70px;
+}
+.carusel{
+    width: 100%;
+    height:auto;
+}
+.container {
+    width: 60%;
+    margin: 2rem auto; 
+    height: 100%;
+}
+   
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 5vw);
+    grid-gap: 1.5rem; 
+}
+.gallery__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery__item--1 {
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 5;
+}
+
+.gallery__item--2 {
+    grid-column-start: 6;
+    grid-column-end: 9;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.gallery__item--3 {
+    grid-column-start: 6;
+    grid-column-end: 9;
+    grid-row-start: 3;
+    grid-row-end: 7;
+}
+.gallery__item--4 {
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 5;
+    grid-row-end: 7;
+}
+.o-nas-h1{
+    font-family: 'Book Antiqua', cursive;
+    font-size: 60px;
+    line-height: 1.2;
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
+    margin-top: 5px;
+}
+/* галерея */
+.galerei{
+    background: #ffffff;
+    border-radius: 20px;
+}
+.form-control {
+    background: rgba(0, 0, 0, 0.505);
+    border: none;
+    font-family: 'Book Antiqua', cursive;
+    font-style: italic;
+    color: white;
+}
+.btn-galeri{
+    --bs-btn-color: white;
+    font-family: 'Book Antiqua', cursive;
+    font-style: italic;
+    background-image: linear-gradient(116.0deg, #6665df 17%, #74209f 82%);
+    border: none;
+    font-size: 30px ;
+    padding: 5px 10px;
+    border-radius: 20px;
+
+
+}
+.control-galerei{
+    width: 400px;
+    padding: 10px;
+    background: #ffffffba;
+    color: black;
+}
+.Auth-form-galeri {
+    width: 300px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+}
+.custom-galerei{
+    border: 2px solid rgba(255, 255, 255, 0.464);
+    width: auto;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 50px;
+    margin-bottom: 70px;
+    background-color: #111230;
+}
+.custom-galerei:hover{
+    box-shadow: 0px 1px 26px -4px #ffffff;
+      
+}
+.container-div{
+    object-fit: cover;
+    width: 400px;
+    height: 275px;
+}
+.container-div-3{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: #111230;
+
+}
+.masor{
+    padding: 20px;
+    width: 1830px;
+}
+@media (max-width: 1560px){
+    .masor{
+        padding: 20px;
+        width: 1330px;
+    }
+}
+.marcer{
+    background: #ffffff32;
+    position: absolute;
+    width: 63%;
+    height: 70%;
+    margin-left:-40%
+}
+.marcer1{
+    background: #ffffff32;
+    position: absolute;
+    width: 63%;
+    height: 70%;
+}
+.information{
+    background: #ffffff8d;
+    position: absolute;
+    width: 40%;
+    height: 80%;
+    margin-left: 67%;
+    text-align: center;
+    padding-top: 30px;
+    font-family: 'Book Antiqua', cursive;
+    font-size: 30px;
+
+}
+.information ul{
+    background: none;
+    list-style-type: none;
+}
+.information li{
+    background: none;
+}
+/* личный кабинет фотографа*/
+.lich-polzovat{
+    font-size: 35px;
+    margin-top: 50px;
+    text-align: left;
+    padding-left: 0px;
+
+}
+
+.lichkabinet img{
+    width: 30%;
+    height: 50%;
+    float: left;
+    padding: 20px 20px;
+    margin-right: 20px;
+    background-size: cover;
+}
+.lichkabinet ul{
+    list-style-type: none; 
+}
+
+.lichkabinet h1{
+    display: inline-block;
+}
+.lichkabinet span{
+    margin-left: 100px;
+    font-family: 'Book Antiqua', cursive;
+    font-size: 35px;
+    font-style: italic;
+}
+.osnova-kabinet {
+    list-style-type: none; 
+    padding-top: 1%;
+}
+.lich-button{
+    margin-top: 13%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.lich-button button{
+    margin-left: 30px;
+}
+.cartins-kabinet{
+    margin-top: 19%;
+}
+.shop-car{
+    position: absolute;
+    top: 30px;
+    right: 0;
+    width: 400px;
+    height: auto;
+    background: white;
+
+}
+.div-cost{
+    background-color: #ffffffc3;
+    border-radius: 20px;
+    display: flex;
+    padding-bottom: 20px;
+    margin: 13% 20px 3% 20px;
+    font-family: 'Book Antiqua', cursive;
+    font-size: 30px;
+    
+}
+.div-cost p{
+    padding-top: 4%;
+    padding-left: 5%;
+    color: black;
+}
+.div-cost img{
+    padding: 20px 0 0 20px;
+    background:none;
+    width: 20%;
+    height: auto;
+}
+.div-cost span{
+    background: none;
+    color: black;
+    padding-top: 10%;
+    margin-left: 40%;
+}
+.div-cost ul{
+    background: none;
+    color: black;
+    list-style-type: none; 
+    margin-left: -21%;
+    margin-top: 12%;
+}
+.div-cost li{
+    background: none;
+    color: black;
+
+}
+.foto-imort{
+    background-color: #ffffffc3;
+    border-radius: 20px;
+    display: flex;
+    padding-bottom: 20px;
+    margin: 16% 20px 3% 20px;
+    font-family: 'Book Antiqua', cursive;
+}
+.form-foro-import{
+    background: none;
+}
+.input-foto{
+    margin: 10px 0 0 50px;
+    width: 350px;
+    
+    
+}
+.input-foto1{
+    margin: 10px 0 0 50px;
+    height: 100px;
+    width: 350px;
+    
+}
+.input-foto2{
+    margin: 10px 0 0 50px;
+    width: 160px;
+    margin-top: 50px;
+    margin-left: 0;
+}
+.input-foto3{
+    margin: 10px 0 0 50px;
+    width: 150px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+
+}
+.price_range{
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+}
+
+/* личный кабинет пользователя */
+
+.lichkabinet-polzovatel h1{
+    display: inline-block;
+    
+}
+.lichkabinet-polzovatel span{
+    margin-left: 100px;
+    font-family: 'Book Antiqua', cursive;
+    font-size: 35px;
+    font-style: italic;
+}
+.lichkabinet-polzovatel ul{
+    list-style-type: none;
+    padding-left: -50px; 
+}
+.lichkabinet-polzovatel{
+    margin-left: 100px;
+    margin-bottom: 0;
+}
+.lich-fotograf{
+    font-size: 35px;
+    margin-top: 50px;
+    text-align: left;
+    padding-left: 0px;
+    padding-left: 30px;
+
+}
+
+/* портфолио */
+.osnova-portfolio{
+    margin: 50px;
+}
+.portvolio img{
+    width: 30%;
+    height: 50%;
+    float: left;
+    padding: 20px 20px;
+    margin-right: 20px;
+    background-size: cover;
+    margin-left: 50px;
+}
+.osnova-portfolio {
+    list-style-type: none; 
+    padding-top: 1%;
+}
+.portvolio ul{
+    list-style-type: none; 
+}
+.portvolio span{
+    margin-left: 100px;
+    font-family: 'Book Antiqua', cursive;
+    font-size: 35px;
+    font-style: italic;
+}
+.portvolio h1{
+    display: inline-block;
+}
+.cartins-portvolio{
+    margin-top: 50%;
+}
