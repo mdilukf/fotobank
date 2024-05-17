@@ -1,12 +1,5 @@
-import { VideoList } from "./components/VideoList";
-import TeacenSection from "./components/TaechenSection";
-import Differences from "./components/Differenses";
-import IntroSection from "./components/IntroSection";
-import TabButton from "./components/TabButton";
-import FeedbackSection from "./components/FeedbackSection";
-import { useEffect, useState } from "react";
-import EffectSection from "./components/EffectSection";
 
+import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import HeaderUser from "./components/Header/HeaderUser";
 import Home from "./components/Home";
