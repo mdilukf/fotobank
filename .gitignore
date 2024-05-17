@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-/babackend/node_modules
+babackend/node_modules/
 /.pnp
 .pnp.js
 
