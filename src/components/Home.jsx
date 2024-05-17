@@ -10,9 +10,6 @@ import logo6 from '../img/estetic.jpg'
 import logo7 from '../img/fotograf.jpg'
 import {Button} from 'react-bootstrap'
 import React, { useState, useEffect, useRef } from 'react'
-import { VideoList } from "../components/VideoList";
-import TabButton from "../components/TabButton";
-import  TaechenSection from "../components/TaechenSection";
 // import {Ripple, initMDB} from "mdb-ui-kit";
 // initMDB({ Ripple });
 import { useClickOutside } from '../hook/useClickOutside';
@@ -379,129 +376,9 @@ export default function Home(){
                 <div className="col-4 justify-content-center d-flex">
                 <div className='container-div-2'>
                     <p>Получай доход со своих работ с нами</p>
-                    <Button  onClick={openModal} className='button1'>присоединиться</Button>
-                    <Modal open={modal} > 
-                    <a href="#close" className="btn-close" aria-hidden="true" onClick={()=> setModal(false)}>×</a>
-
-                    <TabButton  active={tab} onChenge={(current)=>setTab(current)} className='justify-content: center mt-5'/>
-                        {tab == 'main' && (
-                        <>
-                            <section>
-                        <div className="Auth-form-container">
-                          <form className="Auth-form">
-                            <div className="Auth-form-content">
-                              <h3 className="Auth-form-title">Вход</h3>
-                              <div className="form-group mt-3">
-                                {(emailDirty && emaeiError) && <div style={{ color: 'red', background: 'none' }}>{emaeiError}</div>}
-                                <label>Ваш email</label>
-                                <input onChange={e => emailHendler(e)} value={email} onBlur={e => blurHandle(e)} type="email" className="form-control mt-1" name='email' id='email'
-                                />
-                              </div>
-                              <div className="form-group mt-3">
-                                {(passwordDirty && passwordError) && <div style={{ color: 'red', background: 'none' }}>{passwordError}</div>}
-                                <label>Пароль</label>
-                                <input onChange={e => paswordHendler(e)} value={password} onBlur={e => blurHandle(e)} type="password" className="form-control mt-1" name='password' id='password'
-                                />
-                              </div>
-                              <div className="d-grid gap-2 mt-3">
-                                <button disabled={!formValidOne} type="submit" className="btn btn-primary" >
-                                  {/* <Link to='/personal_account' className='font-link2' onClick={() => setModal(false)}> */}
-                                    войти
-                                  {/* </Link> */}
-                                </button >
-                                <button type='button' onClick={test}>Тестовая кнопка</button>
-                              </div>
-                              <p className="text-center mt-2">
-                                забыли <a href="#">пароль?</a>
-                              </p>
-                            </div>
-                          </form>
-                        </div>
-                      </section>
-
-                    </>
-                  )}
-                  {tab == 'feedbeck' && (
-                    <>
-                      <div className="Auth-form-container">
-                        <form className="Auth-form">
-                          <div className="Auth-form-content">
-                            <h3 className="Auth-form-title">Регистрация</h3>
-                            <div className="form-group mt-3">
-                              {(nameDirty && nameError) && <div style={{ color: 'red', background: 'none' }}>{nameError}</div>}
-                              <label>Имя</label>
-                              <input onChange={e => nameHendler(e)} value={name} type="text" className="form-control mt-1" name='name' id='name' onBlur={e => blurHandle(e)} />
-                            </div>
-                            <div className="form-group mt-3">
-                              {(fulnameDirty && fulnameError) && <div style={{ color: 'red', background: 'none' }}>{fulnameError}</div>}
-                              <label>Фамилия</label>
-                              <input onChange={e => fulnameHendler(e)} value={fulname} type="text" className="form-control mt-1" name='fulname' id='fulname' onBlur={e => blurHandle(e)} />
-                            </div>
-                            <div className="form-group mt-3">
-                              {(numberDirty && numberError) && <div style={{ color: 'red', background: 'none' }}>{numberError}</div>}
-                              <label>Телефон</label>
-                              <input onChange={e => numberHendler(e)} value={number} type="tel" className="form-control mt-1" name='number' id='number' onBlur={e => blurHandle(e)} />
-                            </div>
-                            <div className="form-group mt-3">
-                              {(emailregDirty && emaeiregError) && <div style={{ color: 'red', background: 'none' }}>{emaeiregError}</div>}
-                              <label>Email</label>
-                              <input onChange={e => emailregHendler(e)} value={emailreg} onBlur={e => blurHandle(e)} type="email" className="form-control mt-1" name='emailreg' id='emailreg' />
-                            </div>
-                            <div className="form-group mt-3">
-                              {(passwordregDirty && passwordregError) && <div style={{ color: 'red', background: 'none' }}>{passwordregError}</div>}
-                              <label>Пароль</label>
-                              <input onChange={e => paswordregHendler(e)} value={passwordreg} onBlur={e => blurHandle(e)} type="password" className="form-control mt-1" name='passwordreg' id='passwordreg' />
-                            </div>
-                            {/* (event) => setForm((prev) => ({...prev, reason: event.target.value})) */}
-                            <label htmlFor="reason" >Выберете свою роль</label>
-                            <select style={{ background: 'rgba(0, 0, 0, 0.505)', marginTop: '10px' }} id="reason" className="control" value={selectedForm} onChange={e => setForm(e.target.value)}>
-                              <option value="polzovatel">Пользователь</option>
-                              <option value="fotograf">Фотограф</option>
-                            </select>
-                            {selectedForm == "fotograf" ? (
-                              <>
-                                <div className="form-group mt-3">
-                                  {(sityDirty && sityError) && <div style={{ color: 'red', background: 'none' }}>{sityError}</div>}
-                                  <label>Город</label>
-                                  <input onChange={e => sityHendler(e)} value={sity}
-                                    type="text" className="form-control mt-1" name='sity' id='sity' onBlur={e => blurHandle(e)} />
-                                </div>
-                                <div className="form-group mt-3">
-                                  {(printDirty && printError) && <div style={{ color: 'red', background: 'none' }}>{printError}</div>}
-                                  <label>Описание</label>
-                                  <input onChange={e => printHendler(e)} value={print}
-                                    type="text" className="form-control mt-1" name='print' id='print' onBlur={e => blurHandle(e)} />
-                                </div>
-                                <label className="form-label input-foto5" for="customFile">Соглашение о передаче исключительных прав</label>
-                                <input type="file" className="form-control input-foto5" id="customFile4" />
-                                <div className="d-grid gap-2 mt-3">
-                                  <button disabled={!formValidTwo} type="submit" className="btn btn-primary" onClick={test}>
-                                    <Link to='/personal_account_fotograf' className='font-link2' onClick={() => setModal(false)}>
-                                      войти
-                                    </Link>
-                                  </button>
-                                </div>
-                              </>
-                            ) : selectedForm == "polzovatel" ? (
-                              <div className="d-grid gap-2 mt-3">
-                                <button disabled={!formValidTwo} type="submit" className="btn btn-primary" onClick={test}>
-                                  <Link to='/personal_account' className='font-link2' onClick={() => setModal(false)}>
-                                    войти
-                                  </Link>
-                                </button>
-                              </div>
-                            ) :
-                              <p></p>
-                            }
-
-
-                          </div>
-                        </form>
-                      </div>
-
-                        </>
-                        )}
-                    </Modal>
+                    <Button  onClick={openModal} className='button1'>
+                      <Link to='/registration'>присоединиться</Link></Button>
+                    
                 </div>
                 </div>
             </div>
