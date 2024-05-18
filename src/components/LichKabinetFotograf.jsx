@@ -14,6 +14,7 @@ import Masonry from "react-responsive-masonry"
 import React, { useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie'
 import axios from 'axios';
+// import { response } from 'express'
 
 
 
@@ -288,7 +289,7 @@ const [title, setTitle] = useState('')
     }
     const formData = new FormData();
     formData.append('image', selectedFile);
-    formData.append('userid', userId);
+    formData.append('userId', userId);
     formData.append('title', title);
     formData.append('widthFoto', widthFoto);
     formData.append('description', description);
@@ -298,11 +299,12 @@ const [title, setTitle] = useState('')
     formData.append('tagThree', tagThree);
 
     try{
+      // axios.get('http://localhost:5000/checkSession', { params: { sessionId: session } }).then(res 
       const response = await axios.post('http://localhost:5000/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data', 
         },
-      }).then(response => setAvatar(response.data.path))
+      }).then(res => setAvatar(response.data.path))
       setMesag(`Файл успешно загружен: ${response.data.path}`);
       
     } catch(error){
@@ -472,7 +474,6 @@ const [title, setTitle] = useState('')
                                       {/* onClick={testfoto} */}
                                       </form>
                                       
-                                  {mesag && <p>{mesag}</p>}
                                   </div>
                     
             </Modal>
