@@ -36,6 +36,7 @@ const [title, setTitle] = useState('')
   const [tagTwo, setTagTwo] = useState('')
   const [tagOne, setTagOne] = useState('')
   const [selectedFile, setSelectedFile] = useState(null)
+  const [avatar, setAvatar] = useState(null)
   const [uploaded, setUploaded] = useState()
 
   const [titleDirty, setTitleDirty] = useState(false)
@@ -293,8 +294,9 @@ const [title, setTitle] = useState('')
         headers: {
           'Content-Type': 'multipart/form-data', 
         },
-      });
+      }).then(response => setAvatar(response.data.path))
       setMesag(`Файл успешно загружен: ${response.data.path}`);
+      
     } catch(error){
       setMesag('Ошибка при загрузке файла.');
       console.error(error);
@@ -355,7 +357,7 @@ const [title, setTitle] = useState('')
         <>
         <div className='osnova-kabinet'>
             <div className='lichkabinet'>
-                <img src={logo5} alt="" />
+                {avatar ? <img src={avatar} alt="" />: <img src={logo5} alt="" />}
                 <h1 className='lich-polzovat'>{user ? user.name : null}</h1>
                 <span>{user ? user.fulname : null}</span>  
                 <span><input type="text" placeholder='ссылка на ваше портфолио' style={{background: '#ffffff94', color: 'black', borderRadius: '13px', width: '470px'}}/></span>  
