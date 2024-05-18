@@ -139,11 +139,28 @@ app.get('/checkSession', (req, res) => {
         res.status(500).json({ success: false, message: 'Необходимо указать сессию' })
 });
 
-app.post('/upload', filemulter.single('image'), (req, res)=>{
-    if (!req.file) {
-        return res.status(400).send('No file uploaded');
+app.post('/upload', filemulter.single('image'), (req, res) => {
+    const userId = req.body.userId;
+    const title = req.body.title;
+    const widthFoto = req.body.widthFoto;
+    const description = req.body.description;
+    const heightFoto = req.body.heightFoto;
+    const tagOne = req.body.tagOne;
+    const tagTwo = req.body.tagTwo;
+    const tagThree = req.body.tagThree;
+    if (!req.file || !userId || !title || !widthFoto || !description || !heightFoto || !tagOne || !tagTwo || !tagThree) {
+        return res.status(400).send('Отсуствует файл или юзер');
     }
-    res.send({filename: req.file.filename, rath: `/fotousers/${req.file.filename}`});
+
+    const filename = req.file.filename;
+    const filePath = `/fotousers/${filename}`;
+
+    const sql = '`INSERT INTO img (idu, img, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    
+    pool.query(sql, [userId, filename, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree], (err, result) => {
+        if (err) throw err;
+        res.send({ success: true, filename: filename, path: filePath });
+    });
 });
 app.get('/uploads/:filename', (req,res)=>{
     const filename = req.params.filename;

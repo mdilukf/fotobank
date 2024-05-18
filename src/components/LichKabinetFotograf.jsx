@@ -248,7 +248,7 @@ const [title, setTitle] = useState('')
       
     }, [user ]);
 
-    const iduser = user.userId;
+    const userId = user.userId;
   
 
     const handleChange = (e) => {
@@ -288,6 +288,14 @@ const [title, setTitle] = useState('')
     }
     const formData = new FormData();
     formData.append('image', selectedFile);
+    formData.append('userid', userId);
+    formData.append('title', title);
+    formData.append('widthFoto', widthFoto);
+    formData.append('description', description);
+    formData.append('heightFoto', heightFoto);
+    formData.append('tagOne', tagOne);
+    formData.append('tagTwo', tagTwo);
+    formData.append('tagThree', tagThree);
 
     try{
       const response = await axios.post('http://localhost:5000/upload', formData, {

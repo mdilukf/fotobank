@@ -1,4 +1,4 @@
-const { type } = require('@testing-library/user-event/dist/type');
+
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -6,8 +6,9 @@ const storage = multer.diskStorage({
         cb(null, 'fotousers/')
     },
     filename: function(req, file, cb){
-        cb(null, Date.new() + '-' + file.originalname);
+        cb(null, new Date().toISOString() + '-' + file.originalname);
     }
 });
 
 module.exports = multer({storage: storage});
+// const upload = multer({storage: storage});
