@@ -3,7 +3,8 @@ const app = express()
 const port = 5000;
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
-const filemulter = require('../backend/middleware/multer')
+const filemulter = require('../backend/middleware/multer');
+const filemulterUser = require('../backend/middleware/multerUser');
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -61,24 +62,21 @@ app.get('/user', (req, res) => {
         }
     })
 });
-// app.get('/inputfoto', (req, res) => {
-//     console.log(req.query); 
-    
-//     pool.query(`INSERT INTO img (idu, img, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree) VALUES (${req.query.iduser}, '${req.query.file}', '${req.query.title}', '${req.query.widthFoto}', '${req.query.description}', '${req.query.heightFoto}', '${req.query.tagOne}', '${req.query.tagTwo}', '${req.query.tagThree}')`, (err, resSes) => {
-//         if (err) {
-//             console.log(error);
-//             res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
-//         }
-//         else if (resSes) {
-//             console.log(results);
-//             res.status(200).json({ success: true, data: resSes, sessionId: sessionId, message: 'Данные загружены' })
-//         }
-//     })
+ app.get('/inputfoto', (req, res) => {
+    console.log(req.query);
+    pool.query(`INSERT INTO portvolio (iduser, name, fulname, number, sity, print, link) VALUES ('${req.query.userId}', '${req.query.name}', '${req.query.fulname}', '${req.query.number}', '${req.query.sity}', '${req.query.print}', '${req.query.portvolio}')`, (err, resSes) => {
+        if (err) {
 
-//                 // res.status(200).json({ success: true, data: results, message: 'Пользователь найден' })
-//                 // res.status(200).json({success: true, data:results, message: 'Пользователь найден', results.id, results.name, results.fulname, results.sity, results.print})
+        res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
+        console.log(resSes);
+    }
+    else if (resSes) {
+        res.status(200).json({ success: true, data: resSes, sessionId: sessionId, message: 'Данные зарегистрированы' })
+        console.log(resSes);
+    }
+})
 
-// });
+});
 
 app.get('/login', (req, res) => {
     pool.query(`SELECT * FROM users WHERE email = '${req.query.email}' `, (error, results) => {
@@ -163,9 +161,60 @@ app.post('/upload', filemulter.single('image'), (req, res) => {
         res.send({ success: true, filename: filename, path: filePath });
     });
 });
-app.get('/uploads/:filename', (req,res)=>{
+app.get('/upload/:filename', (req,res)=>{
     const filename = req.params.filename;
     const filePath = path.join(__dirname, 'fotousers', filename);
+    res.sendFile(filePath);
+});
+// app.post('/uploadLink', filemulter.single('image'), (req, res) => {
+//     const userId = req.body.userId;
+//     const title = req.body.title;
+//     const widthFoto = req.body.widthFoto;
+//     const description = req.body.description;
+//     const heightFoto = req.body.heightFoto;
+//     const tagOne = req.body.tagOne;
+//     const tagTwo = req.body.tagTwo;
+//     const tagThree = req.body.tagThree;
+    
+//     if (!req.file || !userId || !title || !widthFoto || !description || !heightFoto || !tagOne || !tagTwo || !tagThree) {
+//         return res.status(400).send('Отсуствует файл или юзер');
+//     }
+
+//     const filename = req.file.filename;
+//     const filePath = `/fotousers/${filename}`;
+
+//     const sql = `INSERT INTO img (idu, img, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    
+//     pool.query(sql, [userId, filename, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree], (err, result) => {
+//         if (err) throw err;
+//         res.send({ success: true, filename: filename, path: filePath });
+//     });
+// });
+// app.get('/uploadLink/:filename', (req,res)=>{
+//     const filename = req.params.filename;
+//     const filePath = path.join(__dirname, 'fotousers', filename);
+//     res.sendFile(filePath);
+// });
+app.post('/uploadAvatar', filemulterUser.single('image'), (req, res) => {
+    const userId = req.body.userId;
+
+    if (!req.file || !userId ) {
+        return res.status(400).send('Отсуствует файл или юзер');
+    }
+
+    const filename = req.file.filename;
+    const filePath = `/avotarfoto/${filename}`;
+
+    const sql = `INSERT INTO avatar (iduser, img) VALUES (?, ?)`;
+    
+    pool.query(sql, [userId, filename, ], (err, result) => {
+        if (err) throw err;
+        res.send({ success: true, filename: filename, path: filePath });
+    });
+});
+app.get('/uploadAvatar/:filename', (req,res)=>{
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, 'avotarfoto', filename);
     res.sendFile(filePath);
 });
 

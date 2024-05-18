@@ -14,6 +14,7 @@ import Masonry from "react-responsive-masonry"
 import React, { useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie'
 import axios from 'axios';
+var FormData = require('form-data');
 // import { response } from 'express'
 
 
@@ -29,6 +30,7 @@ const imagess = [
 
 export default function LichKabinetPolzovat(){
 
+const [portvolio, setPortvolio] = useState('')
 const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [heightFoto, setHeightFoto] = useState('')
@@ -37,9 +39,12 @@ const [title, setTitle] = useState('')
   const [tagTwo, setTagTwo] = useState('')
   const [tagOne, setTagOne] = useState('')
   const [selectedFile, setSelectedFile] = useState(null)
+  const [selectedFileAvatar, setSelectedFileAvatar] = useState(null)
+  const [selectedFileLink, setSelectedFileLink] = useState(null)
   const [avatar, setAvatar] = useState(null)
   const [uploaded, setUploaded] = useState()
 
+  const [portvolioDirty, setPortvolioDirty] = useState(false)
   const [titleDirty, setTitleDirty] = useState(false)
   const [descriptionDirty, setDescriptionDirty] = useState(false)
   const [widthFotoDirty, setWidthFotoDirty] = useState(false)
@@ -49,6 +54,7 @@ const [title, setTitle] = useState('')
   const [tagOneDirty, setTagOneDirty] = useState(false)
   const [inputfotoDirty, setInputfotoDirty] = useState(false)
 
+  const [portvolioError, setPortvolioError] = useState('Поле не должно быть пустым')
   const [widthFotoError, setWidthFotoError]=useState('Поле не должен быть пустым')
   const [descriptionError, setDescriptionError]=useState('Пароль не должен быть пустым')
   const [titleError, setTitleError]=useState('Поле не должено быть пустым')
@@ -58,6 +64,7 @@ const [title, setTitle] = useState('')
   const [tagOneError, setTagOneError]=useState('Поле не должен быть пустым')
   const [inputfotoError, setInputfotoError] = useState("Выберите файл")
   const [formValid, setFoemValid] = useState(false)
+  const [formValidAvatar, setFoemValidAvatar] = useState(false)
 
   const [selectedForm, setForm] = useState(0);
 
@@ -71,9 +78,21 @@ const [title, setTitle] = useState('')
     }
   }, [titleError, descriptionError, heightFotoError,widthFotoError, tagOneError , tagThreeError, inputfotoError])
 
+  useEffect(()=>{
+    if(portvolioError ){
+      setFoemValidAvatar(false)
+    }
+    else{
+      setFoemValidAvatar(true)
+    }
+  }, [portvolioError])
+
   const blurHandle = (e) =>{
     switch(e.target.name){
-      case 'title':
+      case 'portvolio':
+        setPortvolioDirty(true)
+        break
+        case 'title':
         setTitleDirty(true)
         break
       case 'input-foto':
@@ -101,6 +120,17 @@ const [title, setTitle] = useState('')
     }
   }
   
+  const potvolioHendel = (e) =>{
+    setPortvolio(e.target.value)
+    if(e.target.value.length <3 ){
+      setPortvolioError('Недопустимое количество символов')
+      if(!e.target.value){
+        setPortvolioError('Поле не должено быть пустым')
+      }
+    }else{
+        setPortvolioError('')
+    }
+  }
   const titleHendler = (e) =>{
     setTitle(e.target.value)
     if(e.target.value.length <3 ){
@@ -250,6 +280,12 @@ const [title, setTitle] = useState('')
     }, [user ]);
 
     const userId = user.userId;
+    const name = user.name;
+    const fulname = user.fulname;
+    const number = user.number;
+    const sity = user.sity;
+    const print = user.print;
+
   
 
     const handleChange = (e) => {
@@ -261,24 +297,6 @@ const [title, setTitle] = useState('')
           else{
             setInputfotoError('')
           }
-
-          // const imageBuffer = file;
-          //     const reader = new FileReader();
-          //     reader.readAsDataURL(new Blob([imageBuffer], { type: 'image/jp0,g' }));
-          //     reader.onload = () => {
-          //         axios.get('http://localhost:5000/inputfoto', { params: { iduser, file: reader.result, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree } })
-          //             .then(response => {
-          //                 console.log(response);
-          //                 setFile(response.data.image);
-          //                 setFile(response.data.data[0].image);
-          //                 props.reload();
-          //             })
-          //             .catch(error => {
-          //                 console.error('Ошибка при загрузке файла:', error);
-          //             });
-          //         setSvgVisible(false);
-          //     };
-          //     setSvgVisible(false);
 
     }
   const handelSubmit = async (event) =>{
@@ -299,7 +317,6 @@ const [title, setTitle] = useState('')
     formData.append('tagThree', tagThree);
 
     try{
-      // axios.get('http://localhost:5000/checkSession', { params: { sessionId: session } }).then(res 
       const response = await axios.post('http://localhost:5000/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data', 
@@ -312,70 +329,94 @@ const [title, setTitle] = useState('')
       console.error(error);
     }
   };
-  
-    // const testfoto =  () => {
+  const handleChangeAvatar = (e) => {
+    setSelectedFileAvatar(e.target.files[0])
 
-    //   const imageBuffer = file;
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(new Blob([imageBuffer], { type: 'image/jpeg' }));
-    //     reader.onload = () => {
-    //         axios.get('http://localhost:5000/inputfoto', { params: { iduser, file: reader.result, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree } })
-    //             .then(response => {
-    //                 console.log(response);
-    //                 setFile(response.data.image);
-    //                 setFile(response.data.data[0].image);
-    //                 props.reload();
-    //             })
-    //             .catch(error => {
-    //                 console.error('Ошибка при загрузке файла:', error);
-    //             });
-    //         setSvgVisible(false);
-    //     };
-    //     setSvgVisible(false);
+    }
+  const handelSubmitAvatar = async (event) =>{
+    event.preventDefault();
+    if (!selectedFileAvatar){
+      setMesag('Пожалуйста, выберите файл для загрузки');
+      return;
+    }
+    const formData = new FormData();
+    formData.append('image', selectedFileAvatar);
+    formData.append('userId', userId);
 
-  
-    //   // axios.get('http://localhost:5000/inputfoto', { params: {iduser, inputfoto, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree } }
-    //   // ).then(res => {
-    //   //   setMessage(res.data.message);
-    //   //   console.log(res);
-  
-    //   // }).catch(err => {
-    //   //   console.error(err);
-    //   //   setMessage(Cookies.get('session'));
-    //   //   console.log(err.response.data.message);
-    //   // })
+    try{ 
+      const response = await axios.post('http://localhost:5000/uploadAvatar', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', 
+        },
+      }).then(res => setAvatar(response.data.path))
+      setMesag(`Файл успешно загружен: ${response.data.path}`);
       
-    // }
+    } catch(error){
+      setMesag('Ошибка при загрузке файла.');
+      console.error(error);
+    }
+  };
+  const handelSubmitLink = async (event) =>{
+    event.preventDefault();
+    if (!selectedFileAvatar){
+      setMesag('Пожалуйста, выберите файл для загрузки');
+      return;
+    }
+    const formData = new FormData();
+    formData.append('image', selectedFileAvatar);
+    formData.append('userId', userId);
 
-
-
-    // const testfoto =  () => {
-    //   axios.get('http://localhost:5000/input', { params: {iduser, inputfoto, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree } }
-    //   ).then(res => {
-    //     setMessage(res.data.message);
-    //     console.log(res);
-  
-    //   }).catch(err => {
-    //     console.error(err);
-    //     setMessage(Cookies.get('session'));
-    //     console.log(err.response.data.message);
-    //   })
+    try{ 
+      const response = await axios.post('http://localhost:5000/uploadAvatar', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', 
+        },
+      }).then(res => setAvatar(response.data.path))
+      setMesag(`Файл успешно загружен: ${response.data.path}`);
       
-    // }
-
+    } catch(error){
+      setMesag('Ошибка при загрузке файла.');
+      console.error(error);
+    }
+  };
+    const testfoto =  () => {
+      
+      axios.get('http://localhost:5000/inputfoto', { params: { userId, name, fulname, number, sity, print, portvolio} }
+      ).then(res => {
+        setMessage(res.data.message);
+        console.log(res);
+  
+      }).catch(err => {
+        console.error(err);
+        setMessage(Cookies.get('session'));
+        console.log(err.response.data.message);
+      })
+      
+    }
+    
     return(
         <>
         <div className='osnova-kabinet'>
             <div className='lichkabinet'>
-                {avatar ? <img src={avatar} alt="" />: <img src={logo5} alt="" />}
+                 <img src={logo5} alt="" />
+                 
                 <h1 className='lich-polzovat'>{user ? user.name : null}</h1>
-                <span>{user ? user.fulname : null}</span>  
-                <span><input type="text" placeholder='ссылка на ваше портфолио' style={{background: '#ffffff94', color: 'black', borderRadius: '13px', width: '470px'}}/></span>  
+                <span>{user ? user.fulname : null}</span> 
+                {/* <form action="" onSubmit={handelSubmitLink}>  */}
+                <span><input onChange={e => potvolioHendel(e)} value={portvolio} name='portvolio' id='portvolio' type="text" onBlur={e=>blurHandle(e)} placeholder='ссылка на ваше портфолио' style={{background: '#ffffff94', color: 'black', borderRadius: '13px', width: '370px', fontSize: '30px'}}/></span>  
+                <span><button className='button7' type="submit" disabled={!formValidAvatar} onClick={testfoto}>загрузить</button></span> 
+                {/* </form> */}
                 <ul>
                     <li><h1 className='lich-polzovat'>{user ? user.number : null}</h1></li>
                     <li><h2 className='lich-polzovat'>{user ? user.sity : null}</h2></li>
                     <li><h2 className='lich-polzovat'>{user ? user.print : null}</h2></li>
-            </ul>     
+            </ul>  
+            <div>  
+            <form action="" onSubmit={handelSubmitAvatar}> 
+            <input type="file" className="form-control input-foto" id="input-foto" name='input-foto' accept='image/*, .phg, .jpg, .jpeg' onChange={handleChangeAvatar}/>
+            <button type="submit" className='button6'>добавить аватарку</button>
+            </form>
+            </div>
             <div className='lich-button'>
             <button className='button2' onClick={openModal}>загрузить фотографию</button>
             <Modal open={modal}>
