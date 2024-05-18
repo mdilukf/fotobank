@@ -6,8 +6,6 @@ import { Navbar, Nav, Button, Container } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import Modal from '../Modal/Modal';
-import TaechenSection from "../../components/TaechenSection";
-import { VideoList } from "../../components/VideoList";
 import TabButton from "../../components/TabButton";
 import LichKabinetPolzovat from "../../components/LichKabinetPolzovat";
 

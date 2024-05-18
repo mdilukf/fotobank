@@ -10,9 +10,8 @@ import logo4 from '../img/ludi.jpg'
 import logo10 from '../img/Дизайн без названия.png'
 import Modal from './Modal/Modal';
 import ModalShop from './Modal/ModalShop';
-import { useState } from 'react'
 import Masonry from "react-responsive-masonry"
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie'
 import axios from 'axios';
 
@@ -27,7 +26,7 @@ const imagess = [
     logo6,
 ]
 
-export default function LichKabinetPolzovat(props){
+export default function LichKabinetPolzovat(){
 
 const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -36,7 +35,7 @@ const [title, setTitle] = useState('')
   const [tagThree, setTagThree] = useState('')
   const [tagTwo, setTagTwo] = useState('')
   const [tagOne, setTagOne] = useState('')
-  const [inputfoto, setInputfoto] = useState(null)
+  const [selectedFile, setSelectedFile] = useState(null)
   const [uploaded, setUploaded] = useState()
 
   const [titleDirty, setTitleDirty] = useState(false)
@@ -203,6 +202,7 @@ const [title, setTitle] = useState('')
     const [user, setUser] = useState([]);
 
     const [message, setMessage] = useState(Cookies.get('session'));
+    const [mesag, setMesag] = useState('');
     
 
     
@@ -250,7 +250,8 @@ const [title, setTitle] = useState('')
     const iduser = user.userId;
   
 
-    function handleChange(e) {
+    const handleChange = (e) => {
+    setSelectedFile(e.target.files[0])
       const file = e.target.files[0];
       if(!file){
             setInputfotoError('Файл не выбран')
@@ -258,26 +259,48 @@ const [title, setTitle] = useState('')
           else{
             setInputfotoError('')
           }
-          const imageBuffer = file;
-              const reader = new FileReader();
-              reader.readAsDataURL(new Blob([imageBuffer], { type: 'image/jp0,g' }));
-              reader.onload = () => {
-                  axios.get('http://localhost:5000/inputfoto', { params: { iduser, file: reader.result, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree } })
-                      .then(response => {
-                          console.log(response);
-                          setFile(response.data.image);
-                          setFile(response.data.data[0].image);
-                          props.reload();
-                      })
-                      .catch(error => {
-                          console.error('Ошибка при загрузке файла:', error);
-                      });
-                  setSvgVisible(false);
-              };
-              setSvgVisible(false);
+
+          // const imageBuffer = file;
+          //     const reader = new FileReader();
+          //     reader.readAsDataURL(new Blob([imageBuffer], { type: 'image/jp0,g' }));
+          //     reader.onload = () => {
+          //         axios.get('http://localhost:5000/inputfoto', { params: { iduser, file: reader.result, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree } })
+          //             .then(response => {
+          //                 console.log(response);
+          //                 setFile(response.data.image);
+          //                 setFile(response.data.data[0].image);
+          //                 props.reload();
+          //             })
+          //             .catch(error => {
+          //                 console.error('Ошибка при загрузке файла:', error);
+          //             });
+          //         setSvgVisible(false);
+          //     };
+          //     setSvgVisible(false);
 
     }
+  const handelSubmit = async (event) =>{
+    event.preventDefault();
+    if (!selectedFile){
+      setMesag('Пожалуйста, выберите файл для загрузки');
+      return;
+    }
+    const formData = new FormData();
+    formData.append('image', selectedFile);
 
+    try{
+      const response = await axios.post('http://localhost:5000/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', 
+        },
+      });
+      setMesag(`Файл успешно загружен: ${response.data.path}`);
+    } catch(error){
+      setMesag('Ошибка при загрузке файла.');
+      console.error(error);
+    }
+  };
+  
     // const testfoto =  () => {
 
     //   const imageBuffer = file;
@@ -348,10 +371,9 @@ const [title, setTitle] = useState('')
 
                 <div className='foto-imort'>
                     
-                    <form action="" className='form-foro-import'>
+                    <form action="" className='form-foro-import' onSubmit={handelSubmit}>
                     <label className="form-label input-foto" for="customFile">Загрузите фотографию</label>
                     <div className='price_range'>
-                      
                     <div className="form-group mt-3">
                         {(titleDirty && titleError) && <div style={{color: 'red', background: 'none'}}>{titleError}</div>}
                         <input onChange={e => titleHendler(e)} value={title} type="text" className="form-control mt-1 input-foto" name='title' id='title' placeholder='название' onBlur={e=>blurHandle(e)}/>
@@ -388,7 +410,7 @@ const [title, setTitle] = useState('')
                     </div>
 
 
-                    <label htmlFor="reason" style={{ marginLeft: '50px'}} >Дополнительные соглашения</label>
+                    <label htmlFor="reason" className='dop-info' >Дополнительные соглашения</label>
                                         <select style={{background: 'rgba(0, 0, 0, 0.505)', marginTop: '10px', marginLeft: '20px'}} id="reason" className="control" value={selectedForm} onChange={e=> setForm(e.target.value)}>
                                             <option value="0">Объекты на фото</option>
                                             <option value="1">Модель</option>
@@ -435,12 +457,12 @@ const [title, setTitle] = useState('')
                                  
                     {(inputfotoDirty && inputfotoError) && <div style={{color: 'red', background: 'none'}}>{inputfotoError}</div>}
                     <input type="file" className="form-control input-foto" id="input-foto" name='input-foto' accept='image/*, .phg, .jpg, .jpeg' onChange={handleChange}/>
-                                      <button disabled={!formValid} type="button" className='button4' >Загрузить фотографию</button>
-                                      
+                                      <button disabled={!formValid} type="submit" className='button4' >Загрузить фотографию</button>
+                                     
                                       {/* onClick={testfoto} */}
                                       </form>
                                       
-
+                                  {mesag && <p>{mesag}</p>}
                                   </div>
                     
             </Modal>

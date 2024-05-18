@@ -289,8 +289,21 @@
 .input-foto{
     margin: 10px 0 0 50px;
     width: 350px;
-    
-    
+
+}
+.form-label{
+    background-color: #ffffff00;
+    color: black;
+    font-size: 20px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.mt-3{
+    background-color: #ffffff00;
+}
+.dop-info{
+    margin-left: 50px;
+    background-color: #ffffff00;
+    color: black;
 }
 .input-foto1{
     margin: 10px 0 0 50px;
