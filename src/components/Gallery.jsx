@@ -12,27 +12,28 @@ import logo6 from '../img/estetic.jpg'
 import logo10 from '../img/Дизайн без названия.png'
 import Modal from './Modal/Modal';
 
-const imagess = [
-    logo1,
-    logo2,
-    logo3,
-    logo6,
-    logo5,
-    logo6,
-]
-const images = [
-    logo1,
-    logo2,
-    logo3,
-]
-const imager = [
-    logo4,
-    logo5,
-    logo6,
-]
 
 
 export default function Gallery(){
+    const imagess = [
+        logo1,
+        logo2,
+        logo3,
+        logo6,
+        logo5,
+        logo6,
+    ]
+    const images = [
+        logo1,
+        logo2,
+        logo3,
+    ]
+    const imager = [
+        logo4,
+        logo5,
+        logo6,
+    ]
+    
     const [data, setData] =useState({img: '', i:0})
 
     const viewImage = (img, i) =>{

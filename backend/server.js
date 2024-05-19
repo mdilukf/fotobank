@@ -113,8 +113,6 @@ app.get('/login', (req, res) => {
                 }
 
             });
-            // res.status(200).json({ success: true, data: results, message: 'Пользователь найден' })
-            // res.status(200).json({success: true, data:results, message: 'Пользователь найден', results.id, results.name, results.fulname, results.sity, results.print})
         }
         else {
             res.status(500).json({ success: false, data: results, message: 'Пользователь не найден' })
