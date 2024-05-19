@@ -22,7 +22,7 @@ export default function Kabinet(){
         } else {
           setUser(null);
         }
-      }, [user]);
+      }, []);
 
     return(
         <>

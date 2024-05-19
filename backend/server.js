@@ -5,9 +5,9 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const filemulter = require('../backend/middleware/multer');
 const filemulterUser = require('../backend/middleware/multerUser');
-
+const bodyParser = require('body-parser');
 const { v4: uuidv4 } = require('uuid');
-
+app.use(bodyParser.json());
 var mysql = require('mysql');
 const { upload } = require('@testing-library/user-event/dist/upload');
 
@@ -21,7 +21,7 @@ app.use(cors({
     credentials: true, // если в запросе используются куки или заголовки аутентификации,
     allowedHeaders: 'Content-Type,Authorization',
 }));
-
+//  УРаааааа, я забыл тебе парсер json поставить , поэтому post не работал как надо, хах
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
@@ -62,20 +62,25 @@ app.get('/user', (req, res) => {
         }
     })
 });
- app.get('/inputfoto', (req, res) => {
+app.get('/inputfoto', (req, res) => {
     console.log(req.query);
     pool.query(`INSERT INTO portvolio (iduser, name, fulname, number, sity, print, link) VALUES ('${req.query.userId}', '${req.query.name}', '${req.query.fulname}', '${req.query.number}', '${req.query.sity}', '${req.query.print}', '${req.query.portvolio}')`, (err, resSes) => {
         if (err) {
 
-        res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
-        console.log(resSes);
-    }
-    else if (resSes) {
-        res.status(200).json({ success: true, data: resSes, sessionId: sessionId, message: 'Данные зарегистрированы' })
-        console.log(resSes);
-    }
-})
+            res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
+            console.log(err);
+        }
+        else if (resSes) {
+            res.status(200).json({ success: true, data: resSes, message: 'Данные зарегистрированы' })
+            // res.status(200).json({ success: true, data: resSes, sessionId: sessionId, message: 'Данные зарегистрированы' }) - внимательнее с данными. Ошибка была в  sessionId: sessionId - его тут нет, потому что такая переменная не инитцилизированна и неоткуда не берется.
+            console.log(resSes);
+        }
+    })
 
+});
+
+app.post('/create_image', (req, res) => {
+    console.log(req.body);
 });
 
 app.get('/login', (req, res) => {
@@ -102,11 +107,11 @@ app.get('/login', (req, res) => {
                             res.status(200).json({ success: true, data: resSes, sessionId: sessionId, message: 'Пользователь найден' })
                         }
                     })
-                    
+
                 } else if (!passwordIsCorrect) {
                     res.status(500).json({ success: true, data: err, message: 'Неверный пароль!' })
                 }
-                
+
             });
             // res.status(200).json({ success: true, data: results, message: 'Пользователь найден' })
             // res.status(200).json({success: true, data:results, message: 'Пользователь найден', results.id, results.name, results.fulname, results.sity, results.print})
@@ -146,7 +151,7 @@ app.post('/upload', filemulter.single('image'), (req, res) => {
     const tagOne = req.body.tagOne;
     const tagTwo = req.body.tagTwo;
     const tagThree = req.body.tagThree;
-    
+
     if (!req.file || !userId || !title || !widthFoto || !description || !heightFoto || !tagOne || !tagTwo || !tagThree) {
         return res.status(400).send('Отсуствует файл или юзер');
     }
@@ -155,50 +160,23 @@ app.post('/upload', filemulter.single('image'), (req, res) => {
     const filePath = `/fotousers/${filename}`;
 
     const sql = `INSERT INTO img (idu, img, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    
+
     pool.query(sql, [userId, filename, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree], (err, result) => {
         if (err) throw err;
         res.send({ success: true, filename: filename, path: filePath });
     });
 });
-app.get('/upload/:filename', (req,res)=>{
-    const filename = req.params.filename;
+app.get('/uploads/:filename', (req, res) => {
+    const filename = `SELECT img FROM img`;
+    // const filename = req.params.filename;
     const filePath = path.join(__dirname, 'fotousers', filename);
     res.sendFile(filePath);
 });
-// app.post('/uploadLink', filemulter.single('image'), (req, res) => {
-//     const userId = req.body.userId;
-//     const title = req.body.title;
-//     const widthFoto = req.body.widthFoto;
-//     const description = req.body.description;
-//     const heightFoto = req.body.heightFoto;
-//     const tagOne = req.body.tagOne;
-//     const tagTwo = req.body.tagTwo;
-//     const tagThree = req.body.tagThree;
-    
-//     if (!req.file || !userId || !title || !widthFoto || !description || !heightFoto || !tagOne || !tagTwo || !tagThree) {
-//         return res.status(400).send('Отсуствует файл или юзер');
-//     }
-
-//     const filename = req.file.filename;
-//     const filePath = `/fotousers/${filename}`;
-
-//     const sql = `INSERT INTO img (idu, img, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    
-//     pool.query(sql, [userId, filename, title, widthFoto, description, heightFoto, tagOne, tagTwo, tagThree], (err, result) => {
-//         if (err) throw err;
-//         res.send({ success: true, filename: filename, path: filePath });
-//     });
-// });
-// app.get('/uploadLink/:filename', (req,res)=>{
-//     const filename = req.params.filename;
-//     const filePath = path.join(__dirname, 'fotousers', filename);
-//     res.sendFile(filePath);
-// });
+ 
 app.post('/uploadAvatar', filemulterUser.single('image'), (req, res) => {
     const userId = req.body.userId;
 
-    if (!req.file || !userId ) {
+    if (!req.file || !userId) {
         return res.status(400).send('Отсуствует файл или юзер');
     }
 
@@ -206,13 +184,13 @@ app.post('/uploadAvatar', filemulterUser.single('image'), (req, res) => {
     const filePath = `/avotarfoto/${filename}`;
 
     const sql = `INSERT INTO avatar (iduser, img) VALUES (?, ?)`;
-    
-    pool.query(sql, [userId, filename, ], (err, result) => {
+
+    pool.query(sql, [userId, filename,], (err, result) => {
         if (err) throw err;
         res.send({ success: true, filename: filename, path: filePath });
     });
 });
-app.get('/uploadAvatar/:filename', (req,res)=>{
+app.get('/uploadsAvatar/:filename', (req, res) => {
     const filename = req.params.filename;
     const filePath = path.join(__dirname, 'avotarfoto', filename);
     res.sendFile(filePath);

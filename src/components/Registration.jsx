@@ -284,7 +284,7 @@ export default function Registration (){
       } else {
         setUser(null);
       }
-    }, [user]);
+    }, []);
   
 
     return(
