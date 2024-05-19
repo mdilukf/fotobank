@@ -10,6 +10,7 @@ const { v4: uuidv4 } = require('uuid');
 app.use(bodyParser.json());
 var mysql = require('mysql');
 const { upload } = require('@testing-library/user-event/dist/upload');
+const path = require('path');
 
 var corsOptions = {
     origin: 'http://localhost:3000',
@@ -179,7 +180,7 @@ app.get('/selectfoto', (req,res)=>{
         }
     }
     })
-})
+});
 app.get('/uploads/:filename', (req, res) => {
     const filename = req.params.filename;
     const filePath = path.join(__dirname, 'fotousers', filename);
@@ -203,6 +204,22 @@ app.post('/uploadAvatar', filemulterUser.single('image'), (req, res) => {
         res.send({ success: true, filename: filename, path: filePath });
     });
 });
+app.get('/selectfotoavatar', (req,res)=>{
+    pool.query(`SELECT img FROM avatar WHERE iduser LIKE '${req.query.userId}'`, (err, resfoto)=>{
+        if(err){
+            res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
+            
+        }
+        else if(resfoto){
+        if(resfoto){
+            res.status(200).json({ success: true, data: resfoto, message: 'Данные перешли' })
+        }
+        else{
+            res.status(500).json({ success: false, data: resfoto, message: 'Данных нет' })
+        }
+    }
+    })
+});
 app.get('/uploadsAvatar/:filename', (req, res) => {
     const filename = req.params.filename;
     const filePath = path.join(__dirname, 'avotarfoto', filename);
@@ -212,3 +229,24 @@ app.get('/uploadsAvatar/:filename', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 }) 
+app.get('/selectimg', (req,res)=>{
+    pool.query(`SELECT * FROM img `, (err, resfoto)=>{
+        if(err){
+            res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
+            
+        }
+        else if(resfoto){
+        if(resfoto){
+            res.status(200).json({ success: true, data: resfoto, message: 'Данные перешли' })
+        }
+        else{
+            res.status(500).json({ success: false, data: resfoto, message: 'Данных нет' })
+        }
+    }
+    })
+});
+app.get('/uploadsimg/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, 'fotousers', filename);
+    res.sendFile(filePath);
+});

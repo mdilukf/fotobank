@@ -233,6 +233,8 @@ export default function LichKabinetPolzovat() {
   };
   const [user, setUser] = useState([]);
   const [selectfoto, setSelectfoto] = useState([]);
+  const [photos, setPhotos] = useState([]);
+  const [photosavatar, setPhotosavatar] = useState([]);
 
   const [message, setMessage] = useState(Cookies.get('session'));
   const [mesag, setMesag] = useState('');
@@ -287,16 +289,33 @@ export default function LichKabinetPolzovat() {
   const sity = user.sity;
   const print = user.print;
 
-  axios.get('http://localhost:5000/selectfoto', { params: { userId } }).then(res => {
-    setSelectfoto(res.data.data);
-  }).catch(err => {
+  // useEffect(()=> {
+  axios.get('http://localhost:5000/selectfoto', { params: { userId } }).then(res => { 
+  setPhotos(res.data.data.map((item, i)=> {
+    return(
+
+
+        <img src={`http://localhost:5000/uploads/${item.img}`} alt="" className='fotowith' />
+
+
+    )
+  }))
+
+    }).catch(err => {
     console.log(err);
   })
-  axios.get('http://localhost:5000/uploads/', {params: {selectfoto}}).then(res=>{
+  axios.get('http://localhost:5000/selectfotoavatar', { params: { userId } }).then(res => { 
+  setPhotosavatar(res.data.data.map((item, i)=> {
+    return(
+        <img src={`http://localhost:5000/uploadsAvatar/${item.img}`} alt="" style={{width: "300px", background: 'none'}} />
 
-}).catch(err => {
-  console.log(err);
-})
+    )
+  }))
+
+    }).catch(err => {
+    console.log(err);
+  })
+// }, []);
 
 
 
@@ -369,29 +388,7 @@ export default function LichKabinetPolzovat() {
       console.error(error);
     }
   };
-  const handelSubmitLink = async (event) => {
-    event.preventDefault();
-    if (!selectedFileAvatar) {
-      setMesag('Пожалуйста, выберите файл для загрузки');
-      return;
-    }
-    const formData = new FormData();
-    formData.append('image', selectedFileAvatar);
-    formData.append('userId', userId);
-
-    try {
-      const response = await axios.post('http://localhost:5000/uploadAvatar', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }).then(res => setAvatar(response.data.path))
-      setMesag(`Файл успешно загружен: ${response.data.path}`);
-
-    } catch (error) {
-      setMesag('Ошибка при загрузке файла.');
-      console.error(error);
-    }
-  };
+  
   const testfoto = () => {
 // мне нужно отойти у меня гости
 // хорошо 
@@ -408,12 +405,21 @@ export default function LichKabinetPolzovat() {
 
 
   }
+  const imagess = [
+    logo1,
+    logo2,
+    logo3,
+    logo6,
+    logo5,
+    logo6,
+  ]
 
   return (
     <>
       <div className='osnova-kabinet'>
         <div className='lichkabinet'>
-          <img src={logo5} alt="" />
+          {photosavatar ? photosavatar : logo5}
+
 
           <h1 className='lich-polzovat'>{user ? user.name : null}</h1>
           <span>{user ? user.fulname : null}</span>
@@ -426,12 +432,12 @@ export default function LichKabinetPolzovat() {
             <li><h2 className='lich-polzovat'>{user ? user.sity : null}</h2></li>
             <li><h2 className='lich-polzovat'>{user ? user.print : null}</h2></li>
           </ul>
-          <div>
-            <form action="" onSubmit={handelSubmitAvatar}>
+          
+            <form  onSubmit={handelSubmitAvatar}>
               <input type="file" className="form-control input-foto" id="input-foto" name='input-foto' accept='image/*, .phg, .jpg, .jpeg' onChange={handleChangeAvatar} />
               <button type="submit" className='button6'>добавить аватарку</button>
             </form>
-          </div>
+          
           <div className='lich-button'>
             <button className='button2' onClick={openModal}>загрузить фотографию</button>
             <Modal open={modal}>
@@ -527,14 +533,14 @@ export default function LichKabinetPolzovat() {
                   <input type="file" className="form-control input-foto" id="input-foto" name='input-foto' accept='image/*, .phg, .jpg, .jpeg' onChange={handleChange} />
                   <button disabled={!formValid} type="submit" className='button4' >Загрузить фотографию</button>
 
-                  {/* onClick={testfoto} */}
+
                 </form>
 
               </div>
 
             </Modal>
-            {selectfoto ? setSelectfoto : "нету данных"}
-            {/* <img src="http://localhost:5000/selectfoto" alt="" /> */}
+
+            
            
             {cardOpen && (
               <div className='shop-car'>
@@ -546,41 +552,11 @@ export default function LichKabinetPolzovat() {
 
         </div>
       </div>
+      <Masonry columnsCount={3} gutter="20px">
+        {photos}
+      </Masonry>
 
-      <div className='cartins-kabinet'>
-        {
-          data.img && <div style={{
-            width: '80%',
-            height: '80%',
-            background: '#111230eb',
-            position: 'fixed',
-            top: '100px',
-            left: '10%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            overflow: 'hidden',
-            zIndex: '100'
-          }}>
-            <button onClick={() => imgAction()} style={{ position: 'absolute', border: '1px solid #ffffff00', top: '10px', right: '50px', color: 'white', fontSize: '30px', background: '#11123000' }}>x</button>
-            <img src={data.img} alt="" style={{ width: 'auto', maxWidth: '60%', maxHeight: '60%', position: 'relative' }} />
-            <div className='marcer1'></div>
-
-          </div>
-        }
-        <div className='masor' >
-          <Masonry columnsCount={3} gutter="20px">
-            {imagess.map((image, i) => (
-              <img
-                key={i}
-                src={image}
-                style={{ width: "100%", display: "block", cursor: 'pointer' }}
-                onClick={() => viewImage(image, i)}
-              />
-            ))}
-          </Masonry>
-        </div>
-      </div>
+     
     </>
   )
 }

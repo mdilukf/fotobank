@@ -11,6 +11,8 @@ import logo5 from '../img/город.jpg'
 import logo6 from '../img/estetic.jpg'
 import logo10 from '../img/Дизайн без названия.png'
 import Modal from './Modal/Modal';
+import axios from 'axios';
+import Card from 'react-bootstrap/Card';
 
 
 
@@ -45,9 +47,46 @@ export default function Gallery(){
             setData({img: '', i:0})
         }
     }
+    const [selectimages, setSelectimages] = useState([]);
 
     const [selectedForm, setForm] = useState(0);
     
+    axios.get('http://localhost:5000/selectimg', ).then(res => { 
+        setSelectimages(res.data.data.map((item, i)=> {
+          return(
+            <>
+            <div className="galereifoto">
+             <img src={`http://localhost:5000/uploadsimg/${item.img}`} alt="" className='fotowithgalerei'  style={{width: '500px'}}/>
+             <Card.Title className="titlefoto">{item.title}</Card.Title>
+             <Card.Text className="discriptionfoto">
+                {item.description}
+                <p>{item.widthFoto}*{item.heightFoto}</p>
+                <p className="price">цена: 120р</p>
+                <button className="button8">купить</button>
+                
+            </Card.Text>
+             </div>
+
+              {/* <Card style={{ width: '18rem' }}>
+             
+      <Card.Body>
+        <Card.Title>{item.title}</Card.Title>
+        <Card.Text>
+          Some quick example text to build on the card title and make up the
+          bulk of the card's content.
+        </Card.Text>
+        <Button variant="primary">Go somewhere</Button>
+      </Card.Body>
+    </Card> */}
+              </>
+
+
+          )
+        }))
+      
+          }).catch(err => {
+          console.log(err);
+        })
     return(
         
         <>
@@ -169,7 +208,10 @@ export default function Gallery(){
                 </>
                 ): selectedForm == 0 ?(
                     <>
-                    {
+                    <Masonry columnsCount={3} gutter="20px" style={{width: '1830px'}}>
+                        {selectimages}
+                    </Masonry>
+                    {/* {
                         data.img && <div style={{
                             width: '80%',
                             height: '80%',
@@ -212,7 +254,7 @@ export default function Gallery(){
                             />
                             ))}
                         </Masonry>
-                    </div>
+                    </div> */}
                     
                 </>
                 ): 
