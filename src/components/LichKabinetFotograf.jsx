@@ -232,6 +232,7 @@ export default function LichKabinetPolzovat() {
     )
   };
   const [user, setUser] = useState([]);
+  const [selectfoto, setSelectfoto] = useState([]);
 
   const [message, setMessage] = useState(Cookies.get('session'));
   const [mesag, setMesag] = useState('');
@@ -267,6 +268,7 @@ export default function LichKabinetPolzovat() {
     setSessionId(session);
     if (session) {
       axios.get('http://localhost:5000/checkSession', { params: { sessionId: session } }).then(res => {
+
         setUser(res.data.data[0]);
       }).catch(err => {
         console.log(err);
@@ -278,13 +280,24 @@ export default function LichKabinetPolzovat() {
     }
 
   }, []);
-
   const userId = user.userId;
   const name = user.name;
   const fulname = user.fulname;
   const number = user.number;
   const sity = user.sity;
   const print = user.print;
+
+  axios.get('http://localhost:5000/selectfoto', { params: { userId } }).then(res => {
+    setSelectfoto(res.data.data);
+  }).catch(err => {
+    console.log(err);
+  })
+  axios.get('http://localhost:5000/uploads/', {params: {selectfoto}}).then(res=>{
+
+}).catch(err => {
+  console.log(err);
+})
+
 
 
 
@@ -393,10 +406,6 @@ export default function LichKabinetPolzovat() {
       console.log(err.response.data.message);
     })
 
-    let data = { id: 1 }
-
-    
-    axios.post('http://localhost:5000/create_image', data);
 
   }
 
@@ -524,9 +533,9 @@ export default function LichKabinetPolzovat() {
               </div>
 
             </Modal>
-
-
-            <img src="http://localhost:5000/uploads" alt="" />
+            {selectfoto ? setSelectfoto : "нету данных"}
+            {/* <img src="http://localhost:5000/selectfoto" alt="" /> */}
+           
             {cardOpen && (
               <div className='shop-car'>
 

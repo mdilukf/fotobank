@@ -166,13 +166,28 @@ app.post('/upload', filemulter.single('image'), (req, res) => {
         res.send({ success: true, filename: filename, path: filePath });
     });
 });
+app.get('/selectfoto', (req,res)=>{
+    pool.query(`SELECT img FROM img WHERE idu LIKE '${req.query.userId}'`, (err, resfoto)=>{
+        if(err){
+            res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
+            
+        }
+        else if(resfoto){
+        if(resfoto){
+            res.status(200).json({ success: true, data: resfoto, message: 'Данные перешли' })
+        }
+        else{
+            res.status(500).json({ success: false, data: resfoto, message: 'Данных нет' })
+        }
+    }
+    })
+})
 app.get('/uploads/:filename', (req, res) => {
-    const filename = `SELECT img FROM img`;
-    // const filename = req.params.filename;
+    const filename = req.params.filename;
     const filePath = path.join(__dirname, 'fotousers', filename);
     res.sendFile(filePath);
 });
- 
+
 app.post('/uploadAvatar', filemulterUser.single('image'), (req, res) => {
     const userId = req.body.userId;
 
