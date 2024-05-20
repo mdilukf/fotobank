@@ -261,7 +261,8 @@ export default function Registration (){
       setSessionId(session);
       if (session) {
         axios.get('http://localhost:5000/checkSession', { params: { sessionId: session } }).then(res => {
-          console.log(res);
+          
+      console.log(res);
           setUser(res.data.data[0]);
         }).catch(err => {
           console.log(err);

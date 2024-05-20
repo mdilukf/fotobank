@@ -16,6 +16,7 @@ import Contacts from "./components/Contacts";
 import LichKabinetPolzovat from "./components/LichKabinetPolzovat";
 import LichKabinetFotograf from "./components/LichKabinetFotograf";
 import Kabinet from "./components/Kabinet";
+import Korzina from "./components/Korzina";
 
 import axios from 'axios';
 import Cookies from 'js-cookie'
@@ -60,6 +61,7 @@ function App() {
         <Route path="/personal_account" element={<LichKabinetPolzovat />} />
         <Route path="/personal_account_fotograf" element={<LichKabinetFotograf />} />
         <Route path="/kabinet" element={<Kabinet />} />
+        <Route path="/korzina" element={<Korzina />} />
 
       </Routes>
 

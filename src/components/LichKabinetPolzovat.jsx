@@ -7,6 +7,7 @@ import { useState } from 'react'
 import Masonry from "react-responsive-masonry"
 import React, { useEffect, useRef } from 'react'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 
@@ -78,7 +79,7 @@ export default function LichKabinetPolzovat(){
         <div className='osnova-kabinet'>
             <div className='lichkabinet-polzovatel'>
                 <h1 className='lich-fotograf'>{user ? user.name : null }</h1>
-                <span>{ user ? user.name : null }</span>  
+                <span>{ user ? user.fulname : null }</span>  
                 
                 <ul>
                     <li><h1 className='lich-polzovat'>{user ? user.number : null}</h1></li>
@@ -88,24 +89,11 @@ export default function LichKabinetPolzovat(){
             
 
             
-            <button className='button5' onClick={setCardOpen}>перейти в корзину</button>
+            <button className='button5' >
+                <Link to='/korzina'>перейти в корзину</Link>
+                </button>
 
-            <ModalShop open={cardOpen} className='shop-car'> 
-                    <a href="#close" className="btn-close" aria-hidden="true" onClick={()=> setCardOpen(false)}>×</a>
-
-                    <div className='div-cost'>
-                        <img src={logo7} alt="" />
-                        <p>название</p>
-                        <ul>
-                            <li>высота</li>
-                            <li>ширина</li>
-                        </ul>
-                        <span>цена</span>
-                    </div>
-
-                    <button className='button3'>Оплатить</button>
-                    
-            </ModalShop>
+            
             {cardOpen && (
                 <div className='shop-car'>
 

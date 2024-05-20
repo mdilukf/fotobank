@@ -15,7 +15,8 @@ export default function Kabinet(){
         setSessionId(session);
         if (session) {
           axios.get('http://localhost:5000/checkSession', { params: { sessionId: session } }).then(res => {
-            setUser(res.data.data[0]);
+            
+          setUser(res.data.data[0]);
           }).catch(err => {
             console.log(err);
           });
@@ -26,7 +27,7 @@ export default function Kabinet(){
 
     return(
         <>
-        {user ? (user.selectetForm == 'polzovatel' ? (<LichKabinetPolzovat />) : (user.selectetForm == 'fotograf' ? (<LichKabinetFotograf />) : ('Польлзователь не найден!'))) : ('Не авторизован')}
+        {user ? (user.selectetForm == 'polzovatel' ? (<LichKabinetPolzovat />) : (user.selectetForm == 'fotograf' ? (<LichKabinetFotograf />) : ('Польлзователь не найден!'))) : ('Не авторизован!')}
         </>
     )
 }
