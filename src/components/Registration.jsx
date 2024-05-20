@@ -398,7 +398,7 @@ export default function Registration (){
                     </>
                   )}
 
-        {user ? (user.selectetForm == 'polzovatel' ? (<LichKabinetPolzovat />) : (user.selectetForm == 'fotograf' ? (<LichKabinetFotograf />) : ('РОль не найдена'))) : ('Не авторизован')}
+        
         </>
     )
 }

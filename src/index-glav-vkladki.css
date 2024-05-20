@@ -79,6 +79,21 @@
     text-align: center;
     margin-top: 5px;
 }
+/* портфолио */
+.portvolioimg{
+    width: 300px;
+    background: 'none';
+    margin-left: 100px;
+    margin-top: 50px;
+    align-items: center;
+    justify-content: center;
+    background: #111230;
+}
+.linkportvolio{
+    color: white;
+    margin-bottom: 20px;
+    background: #111230;
+}
 /* галерея */
 .galerei{
     background: #ffffff;
@@ -87,24 +102,33 @@
 .galereifoto{
     margin-top: 100px;
     border: 2px solid white;
+    box-shadow: 0px 0px 26px 7px rgba(255, 255, 255, 0.2);
     width: 520px;
+    background: #111230;
+}
+.galereifoto p{
+    background: #111230;
 }
 .price {
     font-size: 30px;
+    background: #111230;
 }
 .titlefoto{
     padding-top: -20px;
     padding-left: 20px;
     font-size: 35px;
+    background: #111230;
 }
 .discriptionfoto{
     padding-left: 20px;
+    background: #111230;
 }
 .fotowithgalerei{
     width: "500px";
     background: 'none';
     padding-left: 3%;
     padding-top: 20px;
+    background: #111230;
 }
 .form-control {
     background: rgba(0, 0, 0, 0.505);

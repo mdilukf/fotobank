@@ -11,6 +11,8 @@ import logo5 from '../img/город.jpg'
 import logo6 from '../img/estetic.jpg'
 import logo10 from '../img/Дизайн без названия.png'
 import Modal from './Modal/Modal';
+import axios from 'axios'
+import Card from 'react-bootstrap/Card';
 
 const imagess = [
     logo1,
@@ -44,9 +46,32 @@ export default function Portfolio(){
             setData({img: '', i:0})
         }
     }
+    const [portvolio, setPortvolio] = useState([]);
 
     const [selectedForm, setForm] = useState(0);
-    
+    axios.get('http://localhost:5000/selectportvolio').then(res => { 
+  setPortvolio(res.data.data.map((item, i)=> {
+    return(
+        <>
+        <div className="galereifoto">
+        <img src={`http://localhost:5000/uploadsportvolio/${item.img}`} alt="" className="portvolioimg" />
+        <Card.Title className="titlefoto">{item.name} {item.fulname}</Card.Title>
+                 <Card.Text className="discriptionfoto">
+                    {item.sity}
+                    <p>{item.ptint}</p>
+                    <p>Для просмотра портфолиа, перейдите по ссылке</p>
+                <a href={`${item.link}`} className="linkportvolio">{item.link}</a>
+                    
+                </Card.Text>
+        </div>
+        </>
+
+    )
+  }))
+
+    }).catch(err => {
+    console.log(err);
+  })
     return(
         
         <>
@@ -58,67 +83,11 @@ export default function Portfolio(){
         </div>
         
                 <>
-                   {
-                        data.img && <div style={{
-                            width: '100%',
-                            height: '100%',
-                            background: '#111230eb',
-                            position: 'fixed',
-                            top: '100px',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            overflow: 'hidden',
-                            zIndex: '100'
-                            }}>
-                            <button  onClick={()=>imgAction()} style={{position: 'absolute', border: '1px solid #ffffff00', top: '10px', right: '50px', color: 'white', fontSize:'30px', background:'#11123000'}}>x</button>
-                            
-                            <div className='osnova-portfolio'>
-                            <div className='portvolio'>
-                            <img src={data.img} alt="" style={{width: 'auto', maxWidth: '60%', maxHeight: '60%', position: 'relative', marginLeft: '-20%'}}/>
-                                <h1 className='lich-polzovat'>Иия</h1>
-                                <span>Фамилия</span>  
-                                <input type="text" placeholder='ссылка на ваше портфолио' style={{background: '#ffffff94', color: 'black', borderRadius: '13px', width: '470px', marginLeft: '0', height: '40px'}}/>
-                                <ul>
-                                    <li><h1 className='lich-polzovat'>Номер телефона</h1></li>
-                                    <li><h2 className='lich-polzovat'>Город</h2></li>
-                                    <li><h2 className='lich-polzovat'>описание</h2></li>
-                            </ul>     
-                           
-                            </div>
-                        </div>
-                    
-                        {/* <div className='cartins-portvolio'>
-                      
-                                    <div className='masor' >
-                                        <Masonry columnsCount={3} gutter="20px">
-                                            {imagess.map((image, i) => (
-                                            <img
-                                                key={i}
-                                                src={image}
-                                                style={{width: "100%", display: "block", cursor: 'pointer'}}
-                                                onClick={()=> viewImage(image, i)}
-                                            />
-                                            ))}
-                                        </Masonry>
-                                    </div>
-                        </div> */}
+                <Masonry columnsCount={3} gutter="20px" style={{marginLeft: '50px'}}>
+                    {portvolio}
+                </Masonry>
 
-        </div>
-                    }
-                                    <div className='masor' >
-                                        <Masonry columnsCount={3} gutter="20px">
-                                            {imager.map((image, i) => (
-                                            <img
-                                                key={i}
-                                                src={image}
-                                                style={{width: "100%", display: "block", cursor: 'pointer'}}
-                                                onClick={()=> viewImage(image, i)}
-                                            />
-                                            ))}
-                                        </Masonry>
-                                    </div>
-                                    
+                   
                 </>
              
     

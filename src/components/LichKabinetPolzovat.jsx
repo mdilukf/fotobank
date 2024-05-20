@@ -77,13 +77,13 @@ export default function LichKabinetPolzovat(){
         <>
         <div className='osnova-kabinet'>
             <div className='lichkabinet-polzovatel'>
-                {/* <h1 className='lich-fotograf'>{user ? user.name : null || Cookies.get('name')}</h1>
-                <span>{ user ? user.name : null ||Cookies.get('fulname')}</span>  
+                <h1 className='lich-fotograf'>{user ? user.name : null }</h1>
+                <span>{ user ? user.name : null }</span>  
                 
                 <ul>
                     <li><h1 className='lich-polzovat'>{user ? user.number : null}</h1></li>
                    
-            </ul>      */}
+            </ul>     
             
             
 

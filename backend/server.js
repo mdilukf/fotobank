@@ -141,6 +141,8 @@ app.get('/checkSession', (req, res) => {
         res.status(500).json({ success: false, message: 'Необходимо указать сессию' })
 });
 
+// вывод фотографий
+
 app.post('/upload', filemulter.single('image'), (req, res) => {
     const userId = req.body.userId;
     const title = req.body.title;
@@ -245,8 +247,155 @@ app.get('/selectimg', (req,res)=>{
     }
     })
 });
+app.get('/selectimgbeauty', (req,res)=>{
+    pool.query(`SELECT  * FROM img WHERE tagOne='красота' OR tagTwo='красота' OR tagThree='красота' `, (err, resfoto)=>{
+        if(err){
+            res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
+            
+        }
+        else if(resfoto){
+        if(resfoto){
+            res.status(200).json({ success: true, data: resfoto, message: 'Данные перешли' })
+        }
+        else{
+            res.status(500).json({ success: false, data: resfoto, message: 'Данных нет' })
+        }
+    }
+    })
+});
+app.get('/selectimgeat', (req,res)=>{
+    pool.query(`SELECT  * FROM img WHERE tagOne='еда' OR tagTwo='еда' OR tagThree='еда' `, (err, resfoto)=>{
+        if(err){
+            res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
+            
+        }
+        else if(resfoto){
+        if(resfoto){
+            res.status(200).json({ success: true, data: resfoto, message: 'Данные перешли' })
+        }
+        else{
+            res.status(500).json({ success: false, data: resfoto, message: 'Данных нет' })
+        }
+    }
+    })
+});
+app.get('/selectimganimals', (req,res)=>{
+    pool.query(`SELECT  * FROM img WHERE tagOne='животное' OR tagTwo='животное' OR tagThree='животное' OR tagOne='животные' OR tagTwo='животные' OR tagThree='животные'`, (err, resfoto)=>{
+        if(err){
+            res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
+            
+        }
+        else if(resfoto){
+        if(resfoto){
+            res.status(200).json({ success: true, data: resfoto, message: 'Данные перешли' })
+        }
+        else{
+            res.status(500).json({ success: false, data: resfoto, message: 'Данных нет' })
+        }
+    }
+    })
+});
+app.get('/selectimgpipls', (req,res)=>{
+    pool.query(`SELECT  * FROM img WHERE tagOne='люди' OR tagTwo='люди' OR tagThree='люди' OR tagOne='женщина' OR tagTwo='женщина' OR tagThree='женщина' OR tagOne='мужчина' OR tagTwo='мужчина' OR tagThree='мужчина'`, (err, resfoto)=>{
+        if(err){
+            res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
+            
+        }
+        else if(resfoto){
+        if(resfoto){
+            res.status(200).json({ success: true, data: resfoto, message: 'Данные перешли' })
+        }
+        else{
+            res.status(500).json({ success: false, data: resfoto, message: 'Данных нет' })
+        }
+    }
+    })
+});
+app.get('/selectimgsity', (req,res)=>{
+    pool.query(`SELECT  * FROM img WHERE tagOne='город' OR tagTwo='город' OR tagThree='город'`, (err, resfoto)=>{
+        if(err){
+            res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
+            
+        }
+        else if(resfoto){
+        if(resfoto){
+            res.status(200).json({ success: true, data: resfoto, message: 'Данные перешли' })
+        }
+        else{
+            res.status(500).json({ success: false, data: resfoto, message: 'Данных нет' })
+        }
+    }
+    })
+});
+app.get('/selectimgaesthetics', (req,res)=>{
+    pool.query(`SELECT  * FROM img WHERE tagOne='эстетика' OR tagTwo='эстетика' OR tagThree='эстетика'`, (err, resfoto)=>{
+        if(err){
+            res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
+            
+        }
+        else if(resfoto){
+        if(resfoto){
+            res.status(200).json({ success: true, data: resfoto, message: 'Данные перешли' })
+        }
+        else{
+            res.status(500).json({ success: false, data: resfoto, message: 'Данных нет' })
+        }
+    }
+    })
+});
+app.get('/selectportvolio', (req,res)=>{
+    pool.query(`SELECT * FROM avatar JOIN portvolio ON avatar.iduser = portvolio.iduser`, (err, resfoto)=>{
+        if(err){
+            res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
+            
+        }
+        else if(resfoto){
+        if(resfoto){
+            res.status(200).json({ success: true, data: resfoto, message: 'Данные перешли' })
+        }
+        else{
+            res.status(500).json({ success: false, data: resfoto, message: 'Данных нет' })
+        }
+    }
+    })
+});
 app.get('/uploadsimg/:filename', (req, res) => {
     const filename = req.params.filename;
     const filePath = path.join(__dirname, 'fotousers', filename);
+    res.sendFile(filePath);
+});
+app.get('/uploadsimgbeauty/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, 'fotousers', filename);
+    res.sendFile(filePath);
+});
+app.get('/uploadsimgeat/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, 'fotousers', filename);
+    res.sendFile(filePath);
+});
+app.get('/uploadsimganimals/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, 'fotousers', filename);
+    res.sendFile(filePath);
+});
+app.get('/uploadsimgpipls/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, 'fotousers', filename);
+    res.sendFile(filePath);
+});
+app.get('/uploadsimgsity/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, 'fotousers', filename);
+    res.sendFile(filePath);
+});
+app.get('/uploadsimgaesthetics/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, 'fotousers', filename);
+    res.sendFile(filePath);
+});
+app.get('/uploadsportvolio/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, 'avotarfoto', filename);
     res.sendFile(filePath);
 });

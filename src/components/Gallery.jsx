@@ -48,6 +48,12 @@ export default function Gallery(){
         }
     }
     const [selectimages, setSelectimages] = useState([]);
+    const [selectimagesbeauty, setSelectimagesbeauty] = useState([]);
+    const [selectimageseat, setSelectimageseat] = useState([]);
+    const [selectimagesanimals, setSelectimagesanimals] = useState([]);
+    const [selectimagespipls, setSelectimagespipls] = useState([]);
+    const [selectimagessity, setSelectimagessity] = useState([]);
+    const [selectimagesaesthetics, setSelectimagesaesthetics] = useState([]);
 
     const [selectedForm, setForm] = useState(0);
     
@@ -66,18 +72,6 @@ export default function Gallery(){
                 
             </Card.Text>
              </div>
-
-              {/* <Card style={{ width: '18rem' }}>
-             
-      <Card.Body>
-        <Card.Title>{item.title}</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card> */}
               </>
 
 
@@ -86,7 +80,145 @@ export default function Gallery(){
       
           }).catch(err => {
           console.log(err);
-        })
+        });
+        axios.get('http://localhost:5000/selectimgbeauty', ).then(res => { 
+            setSelectimagesbeauty(res.data.data.map((item, i)=> {
+              return(
+                <>
+                <div className="galereifoto">
+                 <img src={`http://localhost:5000/uploadsimgbeauty/${item.img}`} alt="" className='fotowithgalerei'  style={{width: '500px'}}/>
+                 <Card.Title className="titlefoto">{item.title}</Card.Title>
+                 <Card.Text className="discriptionfoto">
+                    {item.description}
+                    <p>{item.widthFoto}*{item.heightFoto}</p>
+                    <p className="price">цена: 120р</p>
+                    <button className="button8">купить</button>
+                    
+                </Card.Text>
+                 </div>
+                  </>
+    
+    
+              )
+            }))
+          
+              }).catch(err => {
+              console.log(err);
+            })
+            axios.get('http://localhost:5000/selectimgeat', ).then(res => { 
+            setSelectimageseat(res.data.data.map((item, i)=> {
+              return(
+                <>
+                <div className="galereifoto">
+                 <img src={`http://localhost:5000/uploadsimgeat/${item.img}`} alt="" className='fotowithgalerei'  style={{width: '500px'}}/>
+                 <Card.Title className="titlefoto">{item.title}</Card.Title>
+                 <Card.Text className="discriptionfoto">
+                    {item.description}
+                    <p>{item.widthFoto}*{item.heightFoto}</p>
+                    <p className="price">цена: 120р</p>
+                    <button className="button8">купить</button>
+                    
+                </Card.Text>
+                 </div>
+                  </>
+    
+    
+              )
+            }))
+          
+              }).catch(err => {
+              console.log(err);
+            })
+            axios.get('http://localhost:5000/selectimganimals', ).then(res => { 
+            setSelectimagesanimals(res.data.data.map((item, i)=> {
+              return(
+                <>
+                <div className="galereifoto">
+                 <img src={`http://localhost:5000/uploadsimganimals/${item.img}`} alt="" className='fotowithgalerei'  style={{width: '500px'}}/>
+                 <Card.Title className="titlefoto">{item.title}</Card.Title>
+                 <Card.Text className="discriptionfoto">
+                    {item.description}
+                    <p>{item.widthFoto}*{item.heightFoto}</p>
+                    <p className="price">цена: 120р</p>
+                    <button className="button8">купить</button>
+                    
+                </Card.Text>
+                 </div>
+                  </>
+    
+    
+              )
+            }))
+          
+              }).catch(err => {
+              console.log(err);
+            })
+            axios.get('http://localhost:5000/selectimgpipls', ).then(res => { 
+            setSelectimagespipls(res.data.data.map((item, i)=> {
+              return(
+                <>
+                <div className="galereifoto">
+                 <img src={`http://localhost:5000/uploadsimgpipls/${item.img}`} alt="" className='fotowithgalerei'  style={{width: '500px'}}/>
+                 <Card.Title className="titlefoto">{item.title}</Card.Title>
+                 <Card.Text className="discriptionfoto">
+                    {item.description}
+                    <p>{item.widthFoto}*{item.heightFoto}</p>
+                    <p className="price">цена: 120р</p>
+                    <button className="button8">купить</button>
+                    
+                </Card.Text>
+                 </div>
+                  </>    
+              )
+            }))
+          
+              }).catch(err => {
+              console.log(err);
+            })
+            axios.get('http://localhost:5000/selectimgsity', ).then(res => { 
+            setSelectimagessity(res.data.data.map((item, i)=> {
+              return(
+                <>
+                <div className="galereifoto">
+                 <img src={`http://localhost:5000/uploadsimgsity/${item.img}`} alt="" className='fotowithgalerei'  style={{width: '500px'}}/>
+                 <Card.Title className="titlefoto">{item.title}</Card.Title>
+                 <Card.Text className="discriptionfoto">
+                    {item.description}
+                    <p>{item.widthFoto}*{item.heightFoto}</p>
+                    <p className="price">цена: 120р</p>
+                    <button className="button8">купить</button>
+                    
+                </Card.Text>
+                 </div>
+                  </>    
+              )
+            }))
+          
+              }).catch(err => {
+              console.log(err);
+            })
+            axios.get('http://localhost:5000/selectimgaesthetics', ).then(res => { 
+            setSelectimagesaesthetics(res.data.data.map((item, i)=> {
+              return(
+                <>
+                <div className="galereifoto">
+                 <img src={`http://localhost:5000/uploadsimgaesthetics/${item.img}`} alt="" className='fotowithgalerei'  style={{width: '500px'}}/>
+                 <Card.Title className="titlefoto">{item.title}</Card.Title>
+                 <Card.Text className="discriptionfoto">
+                    {item.description}
+                    <p>{item.widthFoto}*{item.heightFoto}</p>
+                    <p className="price">цена: 120р</p>
+                    <button className="button8">купить</button>
+                    
+                </Card.Text>
+                 </div>
+                  </>    
+              )
+            }))
+          
+              }).catch(err => {
+              console.log(err);
+            })
     return(
         
         <>
@@ -109,156 +241,56 @@ export default function Gallery(){
                 </select>
                 
                 
-                {selectedForm == 1 ? (
+                {selectedForm == 0 ? (
                 <>
-                   {
-                        data.img && <div style={{
-                            width: '80%',
-                            height: '80%',
-                            background: '#111230eb',
-                            position: 'fixed',
-                            top: '100px',
-                            left:'10%',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            overflow: 'hidden',
-                            zIndex: '100'
-                        }}>
-                            <button  onClick={()=>imgAction()} style={{position: 'absolute', border: '1px solid #ffffff00', top: '10px', right: '50px', color: 'white', fontSize:'30px', background:'#11123000'}}>x</button>
-                            <img src={data.img} alt="" style={{width: 'auto', maxWidth: '60%', maxHeight: '60%', position: 'relative', marginLeft: '-40%'}}/>
-                            <div className='marcer'></div>
-                            <div className='information'>
-                                <p>Название</p>
-                                <p>описание</p>
-                                <ul>
-                                    <li>тег</li>
-                                    <li>тег</li>
-                                    <li>тег</li>
-                                </ul>
-                                <p>цена</p>
-                                <Button className="button">купить</Button>
-                                <p>автор</p>
-                                <p>размеры</p>
-                            </div>
-                        </div>
-                    }
-                    <div className='masor' >
-                        <Masonry columnsCount={3} gutter="20px">
-                            {images.map((image, i) => (
-                            <img
-                                key={i}
-                                src={image}
-                                style={{width: "100%", display: "block", cursor: 'pointer'}}
-                                onClick={()=> viewImage(image, i)}
-                            />
-                            ))}
-                        </Masonry>
-                    </div>
-                    
-                </>
-             
-                ): selectedForm == 2 ?(
-                    <>
-                    {
-                        data.img && <div style={{
-                            width: '80%',
-                            height: '80%',
-                            background: '#111230eb',
-                            position: 'fixed',
-                            top: '100px',
-                            left:'10%',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            overflow: 'hidden',
-                            zIndex: '100'
-                        }}>
-                            <button  onClick={()=>imgAction()} style={{position: 'absolute', border: '1px solid #ffffff00', top: '10px', right: '50px', color: 'white', fontSize:'30px', background:'#11123000'}}>x</button>
-                            <img src={data.img} alt="" style={{width: 'auto', maxWidth: '60%', maxHeight: '60%', position: 'relative', marginLeft: '-40%'}}/>
-                            <div className='marcer'></div>
-                            <div className='information'>
-                                <p>Название</p>
-                                <p>описание</p>
-                                <ul>
-                                    <li>тег</li>
-                                    <li>тег</li>
-                                    <li>тег</li>
-                                </ul>
-                                <p>цена</p>
-                                <Button className="button">купить</Button>
-                                <p>автор</p>
-                                <p>размеры</p>
-                            </div>
-                        </div>
-                    }
-                    <div className='masor' >
-                        <Masonry columnsCount={3} gutter="20px">
-                            {imager.map((image, i) => (
-                            <img
-                                key={i}
-                                src={image}
-                                style={{width: "100%", display: "block", cursor: 'pointer'}}
-                                onClick={()=> viewImage(image, i)}
-                            />
-                            ))}
-                        </Masonry>
-                    </div>
-                    
-                </>
-                ): selectedForm == 0 ?(
-                    <>
                     <Masonry columnsCount={3} gutter="20px" style={{width: '1830px'}}>
                         {selectimages}
                     </Masonry>
-                    {/* {
-                        data.img && <div style={{
-                            width: '80%',
-                            height: '80%',
-                            background: '#111230eb',
-                            position: 'fixed',
-                            top: '100px',
-                            left:'10%',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            overflow: 'hidden',
-                            zIndex: '100'
-                        }}>
-                            <button  onClick={()=>imgAction()} style={{position: 'absolute', border: '1px solid #ffffff00', top: '10px', right: '50px', color: 'white', fontSize:'30px', background:'#11123000'}}>x</button>
-                            <img src={data.img} alt="" style={{width: 'auto', maxWidth: '60%', maxHeight: '60%', position: 'relative', marginLeft: '-40%'}}/>
-                            <div className='marcer'></div>
-                            <div className='information'>
-                                <p>Название</p>
-                                <p>описание</p>
-                                <ul>
-                                    <li>тег</li>
-                                    <li>тег</li>
-                                    <li>тег</li>
-                                </ul>
-                                <p>цена</p>
-                                <Button className="button">купить</Button>
-                                <p>автор</p>
-                                <p>размеры</p>
-                            </div>
-                        </div>
-                    }
-                    <div className='masor' >
-                        <Masonry columnsCount={3} gutter="20px">
-                            {imagess.map((image, i) => (
-                            <img
-                                key={i}
-                                src={image}
-                                style={{width: "100%", display: "block", cursor: 'pointer'}}
-                                onClick={()=> viewImage(image, i)}
-                            />
-                            ))}
-                        </Masonry>
-                    </div> */}
+             
                     
                 </>
-                ): 
-                <p></p>
+             
+                ): selectedForm == 1 ?(
+                    <>
+                    <Masonry columnsCount={3} gutter="20px" style={{width: '1830px'}}>
+                        {selectimagesbeauty}
+                    </Masonry>
+                    
+                    
+                </>
+                ): selectedForm == 2 ?(
+                    <>
+                    <Masonry columnsCount={3} gutter="20px" style={{width: '1830px'}}>
+                        {selectimageseat}
+                    </Masonry>
+
+                    
+                </>
+                ): selectedForm == 3 ?(
+                    <>
+                    <Masonry columnsCount={3} gutter="20px" style={{width: '1830px'}}>
+                        {selectimagesanimals}
+                    </Masonry>
+                </>
+                ): selectedForm == 4 ?(
+                    <>
+                    <Masonry columnsCount={3} gutter="20px" style={{width: '1830px'}}>
+                        {selectimagespipls}
+                    </Masonry>
+                </>
+                ): selectedForm == 5 ?(
+                    <>
+                    <Masonry columnsCount={3} gutter="20px" style={{width: '1830px'}}>
+                        {selectimagessity}
+                    </Masonry>
+                </>
+                ): selectedForm == 6 ?(
+                    <>
+                    <Masonry columnsCount={3} gutter="20px" style={{width: '1830px'}}>
+                        {selectimagesaesthetics}
+                    </Masonry>
+                </>
+                ): <p></p>
                     
                 }
         </form>
