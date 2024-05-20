@@ -359,6 +359,22 @@ app.get('/selectportvolio', (req,res)=>{
     }
     })
 });
+app.get('/poisk', (req,res)=>{
+    pool.query(`SELECT * FROM avatar JOIN portvolio ON avatar.iduser = portvolio.iduser WHERE portvolio.name LIKE '${req.query.poist}' OR portvolio.fulname LIKE '${req.query.poist}'`, (err, resfoto)=>{
+        if(err){
+            res.status(500).json({ success: false, data: err, message: "Ошибка! Повторите попытку." })
+            
+        }
+        else if(resfoto){
+        if(resfoto){
+            res.status(200).json({ success: true, data: resfoto, message: 'Данные перешли' })
+        }
+        else{
+            res.status(500).json({ success: false, data: resfoto, message: 'Данных нет' })
+        }
+    }
+    })
+});
 app.get('/uploadsimg/:filename', (req, res) => {
     const filename = req.params.filename;
     const filePath = path.join(__dirname, 'fotousers', filename);
@@ -395,6 +411,11 @@ app.get('/uploadsimgaesthetics/:filename', (req, res) => {
     res.sendFile(filePath);
 });
 app.get('/uploadsportvolio/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, 'avotarfoto', filename);
+    res.sendFile(filePath);
+});
+app.get('/poisk/:filename', (req, res) => {
     const filename = req.params.filename;
     const filePath = path.join(__dirname, 'avotarfoto', filename);
     res.sendFile(filePath);
